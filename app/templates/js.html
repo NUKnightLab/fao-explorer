@@ -1,0 +1,10 @@
+{% extends "_base.html" %}
+{% block content %}
+<h1>JavaScript Widgets</h1>
+{% endblock %}
+
+{% block footer_script %}
+<script src="http://data.fao.org/developers/widgets/0.2.6/scripts/library.js"></script>
+fao.use.verbose = true;
+
+{% endblock %}
