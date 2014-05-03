@@ -14,7 +14,8 @@ ISO_COUNTRY_CODES = {
     'Nigeria': 566
 }
 
-pop = pd.read_csv('population.csv')
+# this is already here as population-cut.csv
+pop = pd.read_csv('originals/population.csv')
 pop = pop[pop.country_code.isin(ISO_COUNTRY_CODES.values())]
 pop = pop.drop(['Variable','Variant','percent_change'],1)
 pop = pop.rename(columns={'Country':'country','Year':'year', 'country_code': 'uni'})
