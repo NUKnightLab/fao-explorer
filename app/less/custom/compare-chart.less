@@ -1,0 +1,43 @@
+// COMPARE CHART
+
+
+.compare-chart [class*="col-"] {
+	padding: 0px;
+}
+
+.compare-chart {
+	.compare-chart-item{
+		background-color: #EEE; 
+		height:300px;
+		position:relative;
+		width:100%;
+		.compare-chart-item-amount, .compare-chart-item-amount-second {
+			height:100%;
+			width:100%;
+			position:absolute;
+			bottom:0;
+			.compare-chart-item-number {
+				display:table;
+				height:100%;
+				width:100%;
+				p {
+					display:table-cell;
+					vertical-align:middle;
+					text-align:center;
+					
+					
+				}
+			}
+		}
+		
+		.compare-chart-item-amount {
+			
+			background-color: #14CC5E;
+			
+		}
+		.compare-chart-item-amount-second {
+			background-color: #00FFF6;
+		}
+	}
+
+} 
