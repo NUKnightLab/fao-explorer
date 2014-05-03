@@ -35,9 +35,9 @@
 		width = 900 - margin.left - margin.right,
 		height = 500 - margin.top - margin.bottom;
 
-	var parseDate = d3.time.format("%Y").parse;
+	// var parseDate = d3.time.format("%Y").parse;
 
-	var x = d3.time.scale()
+	var x = d3.scale.linear()
 		.range([0, width])
 
 	var y = d3.scale.linear()
@@ -54,8 +54,8 @@
 		// .ticks(5)
 
 	var line = d3.svg.line()
-    .x(function(d) { return x(d.year); })
-    .y(function(d) { return y(d.population); });
+	    .x(function(d) { return x(d.Year); })
+	    .y(function(d) { return y(d.Population); });
 
 	var svg = d3.select(".chart").append("svg")
 	    .attr("width", width + margin.left + margin.right)
@@ -65,8 +65,8 @@
 
 	d3.csv("pop.csv", function(error, data) {
 		data.forEach(function(d) {
-			d.Year = parseInt(d.Year);
-			d.Population = parseInt(d.Population);
+			d.Year = +d.Year;
+			d.Population = +d.Population;
 			console.log(d)
 		});
 
@@ -75,7 +75,7 @@
 
 		svg.append("g")
 			.attr("class", "x axis")
-			.attr("transform", "translte(0," + height + ")")
+			.attr("transform", "translate(0," + height + ")")
 			.call(xAxis);
 
 		svg.append("g")
@@ -87,14 +87,14 @@
 	      .attr("dy", ".71em")
 	      .style("text-anchor", "end")
 	      .text("Population");
-		
+
 		svg.append("path")
-      .datum(d3.extent(data, function(d) {return d.Population}))
+      .datum(data)
       .attr("class", "line")
       .attr("d", line);
 
 	});
-  
+
 
   </script>
 </body>
