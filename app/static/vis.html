@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Visualization</title>
+	<style type="text/css">
+		body {
+			font-family: Helvetica;
+			padding: 50px;
+		}
+	</style>
+</head>
+<body>
+	<h1>Chartssssss</h1>
+	<div class="vis"></div>
+
+	<script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+	<script type="text/javascript">
+		d3.csv("population-cut.csv")
+	    .row(function(d) { return {country: d.Country, population: d.Population, year: d.Year, country_code: d.country_code}; })
+	    .get(function(error, rows) { console.log(rows); });
+	</script>
+</body>
+</html>
