@@ -13,3 +13,12 @@
 1. % of Agricultural Area [flag]
 1. % of Land Area [%]
 1. % of Land Area [flag]
+
+Looking for interesting trends:
+biggest change from 1984-2011
+
+* Saudi Arabia: +37.65% (23% jump between 1992-1993)
+* Puerto Rico: -30.89%
+
+In 2006, Greece's land for agriculture more than doubled, slipped back the next year, and then came back into roughly the right range (data error?)
+
