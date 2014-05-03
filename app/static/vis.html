@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Chartsssss</title>
+	<title>CHINA</title>
+		<!-- load D3plus CSS -->
+	<link href="http://www.d3plus.org/css/d3plus.css" rel="stylesheet" />
 	<style>
 		body {
 		  font: 10px sans-serif;
@@ -26,76 +28,47 @@
 	</style>
 </head>
 <body>
-	<h1>Chartssss</h1>
-	<div class="chart"></div>
+	<h1>Chinaaaa</h1>
+	<div id="viz"></div>
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-	<script src="http://d3js.org/d3.v3.js" charset="utf-8"></script>
-	<script>
-	var margin = {top: 20, right: 15, bottom: 30, left: 70},
-		width = 500 - margin.left - margin.right,
-		height = 200 - margin.top - margin.bottom;
+	<!-- load D3js -->
+	<script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+	<!-- load D3plus after D3js -->
+	<script src="http://www.d3plus.org/js/d3plus.js"></script>
+ 
+<script>
+ 
+  // sample data array
+  var china = [
+	 	{"Country":"China","Year":1985,"type":"rural","per":77.1,"value":819033},
+		{"Country":"China","Year":1990,"type":"rural","per":73.6,"value":857756},
+		{"Country":"China","Year":1995,"type":"rural","per":69,"value":853896},
+		{"Country":"China","Year":2000,"type":"rural","per":64.1,"value":820755},
+		{"Country":"China","Year":2005,"type":"rural","per":57.5,"value":757952},
+		{"Country":"China","Year":2010,"type":"rural","per":50.8,"value":690789},
+		{"Country":"China","Year":1985,"type":"urban","per":22.9,"value":243266},
+		{"Country":"China","Year":1990,"type":"urban","per":26.4,"value":307673},
+		{"Country":"China","Year":1995,"type":"urban","per":31,"value":383635},
+		{"Country":"China","Year":2000,"type":"urban","per":35.9,"value":459674},
+		{"Country":"China","Year":2005,"type":"urban","per":42.5,"value":560225},
+		{"Country":"China","Year":2010,"type":"urban","per":49.2,"value":669032}
+	]
+ 
+  // instantiate d3plus
+  var visualization = d3plus.viz()
+    .container("#viz")  // container DIV to hold the visualization
+    .data(china)  // data to use with the visualization
+    .type("stacked")    // visualization type
+    .id("type")         // key for which our data is unique on
+    .text("type")       // key to use for display text
+    .y("value")         // key to use for y-axis
+    .x("Year", {
+    	"scale": "continuous"
+    })
+    .time("Year")   // key to use for x-axis
+    .draw()             // finally, draw the visualization!
+	
 
-	// var parseDate = d3.time.format("%Y").parse;
-
-	var x = d3.scale.linear()
-		.range([0, width])
-
-	var y = d3.scale.linear()
-		.range([height, 0]);
-
-	var xAxis = d3.svg.axis()
-		.scale(x)
-		.orient("bottom")
-		.ticks(4)
-
-	var yAxis = d3.svg.axis()
-		.scale(y)
-		.orient("left")
-		.ticks(5)
-
-	var line = d3.svg.line()
-	    .x(function(d) { return x(d.Year); })
-	    .y(function(d) { return y(d.Population); });
-
-	var svg = d3.select(".chart").append("svg")
-	    .attr("width", width + margin.left + margin.right)
-	    .attr("height", height + margin.top + margin.bottom)
-	  .append("g")
-	    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-
-	d3.csv("pop.csv", function(error, data) {
-		data.forEach(function(d) {
-			d.Year = +d.Year;
-			d.Population = +d.Population;
-			console.log(d)
-		});
-
-		x.domain(d3.extent(data, function(d) {return d.Year; }));
-		y.domain(d3.extent(data, function(d) {return d.Population; }));
-
-		svg.append("g")
-			.attr("class", "x axis")
-			.attr("transform", "translate(0," + height + ")")
-			.call(xAxis);
-
-		svg.append("g")
-			.attr("class", "y axis")
-			.call(yAxis)
-				.append("text")
-				.attr("transform", "rotate(-90)")
-	      .attr("y", 6)
-	      .attr("dy", ".71em")
-	      .style("text-anchor", "end")
-	      .text("Population");
-
-		svg.append("path")
-      .datum(data)
-      .attr("class", "line")
-      .attr("d", line);
-
-	});
-
-
-  </script>
+</script>
 </body>
 </html>
