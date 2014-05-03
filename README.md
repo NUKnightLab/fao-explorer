@@ -9,6 +9,7 @@ Country  UNI FAOSTAT
 Brazil  76  21
 China   156 351
 India   356 100
+Nigeria 566 159
 Russia  643 185
 
 FAO has 194 members

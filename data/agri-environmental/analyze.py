@@ -35,4 +35,6 @@ agpiv = ag_area.pivot('year','country','pct_land_area')
 # agpiv.plot()
 
 brazil = ag[ag.country_code == 21]
-brazil = brazil[brazil.land_code != 6610]
+brazil = brazil[(brazil.land_code != 6610) | (brazil.land_code != 6700)]
+brag = brazil[isnan(brazil.pct_land_area)]
+brag = brag.pivot('year','land_type','pct_ag_area')
