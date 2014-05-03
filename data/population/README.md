@@ -13,3 +13,16 @@
 7. Percent change from previous year to current year
 
 Values in the country_code column match to the "UNI" column in the country xref.
+
+# Population by City
+
+Source: [CityPopulation.de](http://citypopulation.de)
+
+## Columns
+
+1. Country
+2. City
+3. State
+4. 1991
+5. 2000
+6. 2010
