@@ -63,10 +63,13 @@
 
 $(document).ready(function(){
 	
-	$('.subnav').waypoint('sticky', {
-		offset: 61,
+	/* WAYPOINTS
+	================================================== */
+	$('#main-nav').waypoint('sticky', {
+		offset: 50,
 		wrapper: '<div class="sticky-wrapper" />',
 		stuckClass: 'navbar-fixed-top'
-	}); 
+	});
+	
 	
 });
