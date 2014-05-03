@@ -6211,6 +6211,40 @@ figure figcaption.credit {
   font-family: Helvetica;
   font-size: 30px;
 }
+.compare-chart [class*="col-"] {
+  padding: 0px;
+}
+.compare-chart .compare-chart-item {
+  background-color: #EEE;
+  height: 300px;
+  position: relative;
+  width: 100%;
+}
+.compare-chart .compare-chart-item .compare-chart-item-amount,
+.compare-chart .compare-chart-item .compare-chart-item-amount-second {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+}
+.compare-chart .compare-chart-item .compare-chart-item-amount .compare-chart-item-number,
+.compare-chart .compare-chart-item .compare-chart-item-amount-second .compare-chart-item-number {
+  display: table;
+  height: 100%;
+  width: 100%;
+}
+.compare-chart .compare-chart-item .compare-chart-item-amount .compare-chart-item-number p,
+.compare-chart .compare-chart-item .compare-chart-item-amount-second .compare-chart-item-number p {
+  display: table-cell;
+  vertical-align: middle;
+  text-align: center;
+}
+.compare-chart .compare-chart-item .compare-chart-item-amount {
+  background-color: #14CC5E;
+}
+.compare-chart .compare-chart-item .compare-chart-item-amount-second {
+  background-color: #00FFF6;
+}
 .subnav {
   font-size: 17px;
 }

@@ -14,11 +14,24 @@ ISO_COUNTRY_CODES = {
     'Nigeria': 566
 }
 
-# this is already here as population-cut.csv
-pop = pd.read_csv('originals/population.csv')
-pop = pop[pop.country_code.isin(ISO_COUNTRY_CODES.values())]
-pop = pop.drop(['Variable','Variant','percent_change'],1)
-pop = pop.rename(columns={'Country':'country','Year':'year', 'country_code': 'uni'})
-pop = pop[pop.year >= 1983][pop.year<=2010]
+pop = pd.read_csv('population-cut.csv')
+pop = pop.pivot('Year','Country','Population')
+pop = pop.reindex(pd.Index(xrange(1985,2011),name='Year'),columns=list(pop.columns))
+pop = pop.interpolate()
+pop.to_csv('pop-interpolated.csv')
 
-# poppiv = pop.pivot('Year','Country','value')
+def do_interpolation(df,pop_col_name):
+    df = df.pivot('Year','Country',pop_col_name)
+    df = df.reindex(pd.Index(xrange(1985,2011),name='Year'),columns=list(df.columns))
+    return df.interpolate()    
+pct_rural = do_interpolation(pd.read_csv('percent-rural.csv'),'Percentage_Rural_Population')
+
+pct_urban = do_interpolation(pd.read_csv('percent-urban.csv'),'Percentage_Urban_Population')
+
+rural = do_interpolation(pd.read_csv('rural.csv'),'Rural_Population')
+
+urban = do_interpolation(pd.read_csv('urban.csv'),'Urban_Population')
+
+for c in pop.columns:
+    df = pd.DataFrame({'total': pop[c], 'urban': urban[c],'rural': rural[c],'pct_urban': pct_urban[c], 'pct_rural': pct_rural[c]})
+    df.to_csv('%s-all-interp.csv' % c)
