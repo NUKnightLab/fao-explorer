@@ -1,4 +1,5 @@
 import pandas as pd 
+import numpy as np
 from collections import defaultdict
 
 
@@ -16,25 +17,26 @@ FAOSTAT_COUNTRY_CODES = {
     'Nigeria': 159
 }
 
-pop = pd.read_csv('../population/population.csv')
-pop = pop[pop.country_code.isin(ISO_COUNTRY_CODES.values())]
-pop = pop.drop(['Variable','Variant','percent_change'],1)
-pop = pop.rename(columns={'Country':'country','Year':'year', 'country_code': 'uni'})
-pop = pop[pop.year >= 1983][pop.year<=2010]
 
 
 cap = pd.read_csv("capital_stock.csv",names=['year','investment','inv_code','country','country_code','gross_stock','gross_stock_flg','net_stock','net_stock_flg'],header=0) 
 cap = cap[cap.country_code.isin(FAOSTAT_COUNTRY_CODES.values())]
-cap = cap[cap.year.isin(pop.year.unique())]
+cap = cap[cap.year >= 1985]
+# cap = cap[cap.year.isin(pop.year.unique())]
 
+cap['type'] = pd.Series()
+cap['type'] = np.where(cap['investment'].isin(['Land Development','Plantation Crops']),'CROPS',cap['type'])
+cap['type'] = np.where((cap['investment']=='Machinery & Equipment'),'EQUIP',cap['type'])
+cap['type'] = np.where(cap['investment'].isin(['Livestock (Fixed Assets)','Livestock (inventory)','Structures for Livestock']),'LIVESTOCK',cap['type'])
+cap = cap[['year','country','type','gross_stock']]
+cap = cap.groupby(['year','country','type'])['gross_stock'].sum()
 
-records = cap.to_dict('records')
-poprec = pop.to_dict('records')
-poprecdict = defaultdict(dict)
-for rec in poprec:
-    poprecdict[rec['country']][rec['year']] = rec['value']
+pop = pd.read_csv('../population/pop-interpolated.csv')
+pop = pop.set_index('Year')
 
-for rec in records:
-    rec['population'] = poprecdict[rec['country']][rec['year']]
-    rec['net_per_cap'] = rec['net_stock']/rec['population']
-    rec['gross_per_cap'] = rec['gross_stock']/rec['population']
+for country in pop.columns:
+    cty_cap = cap.unstack(1)[country].unstack()
+    for stock_type in list(cty_cap.columns):
+        cty_cap['%s_PER_CAP' % stock_type] = cty_cap[stock_type] / pop[country]
+    cty_cap.to_csv('%s-capital.csv' % country)    
+
