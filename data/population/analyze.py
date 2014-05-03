@@ -14,11 +14,8 @@ ISO_COUNTRY_CODES = {
     'Nigeria': 566
 }
 
-# this is already here as population-cut.csv
-pop = pd.read_csv('originals/population.csv')
-pop = pop[pop.country_code.isin(ISO_COUNTRY_CODES.values())]
-pop = pop.drop(['Variable','Variant','percent_change'],1)
-pop = pop.rename(columns={'Country':'country','Year':'year', 'country_code': 'uni'})
-pop = pop[pop.year >= 1983][pop.year<=2010]
-
-# poppiv = pop.pivot('Year','Country','value')
+pop = pd.read_csv('population-cut.csv')
+pop = pop.pivot('Year','Country','Population')
+pop = pop.reindex(xrange(1985,2011),columns=list(pop.columns))
+pop = pop.interpolate()
+pop.to_csv('pop-interpolated.csv')
