@@ -8,20 +8,20 @@
 	http://incident57.com/codekit/
 ================================================== */
 
-// @codekit-prepend "source/jquery.smooth-scroll.js";
+// @codekit-prepend "library/jquery.smooth-scroll.js";
 
-// @codekit-prepend "source/bootstrap/transition.js";
-// @codekit-prepend "source/bootstrap/scrollspy.js";
-// @codekit-prepend "source/bootstrap/tab.js";
-// @codekit-prepend "source/bootstrap/tooltip.js";
-// @codekit-prepend "source/bootstrap/carousel.js";
-// @codekit-prepend "source/bootstrap/collapse.js";
-// @codekit-prepend "source/bootstrap/modal.js";
-// @codekit-prepend "source/bootstrap/dropdown.js";
-// @codekit-prepend "source/bootstrap/affix.js";
+// @codekit-prepend "library/bootstrap/transition.js";
+// @codekit-prepend "library/bootstrap/scrollspy.js";
+// @codekit-prepend "library/bootstrap/tab.js";
+// @codekit-prepend "library/bootstrap/tooltip.js";
+// @codekit-prepend "library/bootstrap/carousel.js";
+// @codekit-prepend "library/bootstrap/collapse.js";
+// @codekit-prepend "library/bootstrap/modal.js";
+// @codekit-prepend "library/bootstrap/dropdown.js";
+// @codekit-prepend "library/bootstrap/affix.js";
 
-// @codekit-prepend "source/waypoints.js";
-// @codekit-prepend "source/waypoints-sticky.js";
+// @codekit-prepend "library/waypoints.js";
+// @codekit-prepend "library/waypoints-sticky.js";
 
 /*
 (function ($) {
@@ -63,10 +63,13 @@
 
 $(document).ready(function(){
 	
-	$('.subnav').waypoint('sticky', {
-		offset: 61,
+	/* WAYPOINTS
+	================================================== */
+	$('#main-nav').waypoint('sticky', {
+		offset: 50,
 		wrapper: '<div class="sticky-wrapper" />',
 		stuckClass: 'navbar-fixed-top'
 	});
+	
 	
 });

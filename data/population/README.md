@@ -11,3 +11,5 @@
 5. Value
 6. Country code (ISO 3166)
 7. Percent change from previous year to current year
+
+Values in the country_code column match to the "UNI" column in the country xref.
