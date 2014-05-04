@@ -69,60 +69,11 @@ var initFAO = function() {
       }
     
 
-    function humanNumbers(n) {
-      if (n > 1000000000000) {
-          n = n/1000000000000.0
-          return n.toFixed(2) + " trillion";
-      }
-      if (n > 1000000000) {
-          n = n/1000000000.0
-          return n.toFixed(2) + " billion";
-      }
-      if (n > 1000000) {
-          n = n/1000000.0
-          return n.toFixed(2) + " million";
-      }
-      return n.toFixed(0);
-    }
+    
 
-    var setChartHeight = function() {
-        $.each(capitalStock, function(index, value) {
-			console.log(yr);
-			if (value['year'] == yr && compareItems) {
-	            var livestock = parseFloat(value['LIVESTOCK'] * 1000000)
-	            var crops = parseFloat(value['CROPS'] * 1000000);
-	            var sum = livestock + crops;
-	            var livestockHeight = (livestock / sum) * 100;
-	            var cropsHeight = (crops / sum) * 100;
-			
-				//console.log(livestockHeight);
-				//console.log(cropsHeight);
-			
-	            $(compareItems[0]).css('height', livestockHeight + '%');
-	            $(compareItems[1]).css('height', cropsHeight + '%');
-	            $(values[0]).html('$' + humanNumbers(livestock));
-	            $(values[1]).html('$' + humanNumbers(crops));
-			
-			};
-        });
-    };
+   
 
-	/* INIT COMPARISON CHART
-	================================================== */
 	
-	function compareChartInit(the_data_url) {
-	    if ($('.compare-chart')) {
-		    compareItems = $('.compare-chart-item-amount');
-		    values = $('.value');
-
-
-		    $.getJSON(the_data_url, function(data) {
-				capitalStock = data;
-				console.log(data);
-				setChartHeight();
-		    })
-	    }
-	}
    
 	
 
@@ -212,7 +163,60 @@ var initFAO = function() {
 	/* INIT STUFF
 	================================================== */
 	resizeLandsat();
-	compareChartInit("data/capital-stock/China-capital.json");
+	
+}
+
+/* COMPARISON CHAR TINIT
+================================================== */
+var compareChartInit = function(the_data_url) {
+    if ($('.compare-chart')) {
+	    compareItems = $('.compare-chart-item-amount');
+	    values = $('.value');
+
+
+	    $.getJSON(the_data_url, function(data) {
+			capitalStock = data;
+			console.log(data);
+			setChartHeight();
+	    })
+    }
+}
+var setChartHeight = function() {
+    $.each(capitalStock, function(index, value) {
+		console.log(yr);
+		if (value['year'] == yr && compareItems) {
+            var livestock = parseFloat(value['LIVESTOCK'] * 1000000)
+            var crops = parseFloat(value['CROPS'] * 1000000);
+            var sum = livestock + crops;
+            var livestockHeight = (livestock / sum) * 100;
+            var cropsHeight = (crops / sum) * 100;
+		
+			//console.log(livestockHeight);
+			//console.log(cropsHeight);
+		
+            $(compareItems[0]).css('height', livestockHeight + '%');
+            $(compareItems[1]).css('height', cropsHeight + '%');
+            $(values[0]).html('$' + humanNumbers(livestock));
+            $(values[1]).html('$' + humanNumbers(crops));
+		
+		};
+    });
+};
+
+var humanNumbers = function(n) {
+  if (n > 1000000000000) {
+      n = n/1000000000000.0
+      return n.toFixed(2) + " trillion";
+  }
+  if (n > 1000000000) {
+      n = n/1000000000.0
+      return n.toFixed(2) + " billion";
+  }
+  if (n > 1000000) {
+      n = n/1000000.0
+      return n.toFixed(2) + " million";
+  }
+  return n.toFixed(0);
 }
 
 /* Utlities
