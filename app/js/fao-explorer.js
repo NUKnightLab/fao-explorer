@@ -97,7 +97,23 @@ function humanNumbers(n) {
 
 	
    
-	
+	window.setScrollbarYear = function(year) {
+        var mCSB_container = $("#timeline-navbar .mCSB_container");
+        var mCustomScrollBox = $("#timeline-navbar .mCustomScrollBox");
+        var width = Math.abs(mCSB_container.outerWidth() - mCustomScrollBox.width());
+        var pos = Math.floor(width/25) * (year - 1985);
+        $("#timeline-navbar").mCustomScrollbar("scrollTo", pos);
+    }
+
+    setInterval(function() {
+        if (is_playing) {
+            console.log(yr);
+            if (yr >= 2010) {
+                yr = 1984;
+            }
+            setScrollbarYear(yr + 1);
+        }
+    }, 1000);
 
 	/* SCROLLBAR
 	================================================== */
@@ -110,13 +126,13 @@ function humanNumbers(n) {
     	contentTouchScroll: true,
     	callbacks:{
 			
-    		whileScrolling:function(){
-    			yr = 1985 + Math.floor(25 * (mcs.leftPct/100));
-    			$(".mCSB_dragger_bar").html( yr );
-				
-    		},
 			
     		onScroll: function() {
+    			var idx = Math.ceil(25 * (mcs.leftPct/100)) - 1;
+
+                yr = 1985 + Math.floor(25 * (mcs.leftPct/100));
+                $(".mCSB_dragger_bar").html( yr );
+
                 if ($('div#compare-chart')) {
                   setChartHeight();
                 }
@@ -125,19 +141,12 @@ function humanNumbers(n) {
                   swapLandsatImages();
                 }
 
-    			var idx = Math.ceil(25 * (mcs.leftPct/100)) - 1;
-   			 	// optimization 
-   			 	if (prevIndex === undefined || prevIndex === idx) {
-    				revIndex = idx;
-    				return;
-    			}
 				
 				$('div#landsat-container img').css('visibility', 'hidden');
 			 	$('div#landsat-container img:eq(' + idx + ')').css('visibility', 'visible');
 				
 				var dragger = $(".mCSB_dragger");
 				var dragger_position = dragger.position();
-				console.log(dragger_position.left);
 				
 			}
 			
