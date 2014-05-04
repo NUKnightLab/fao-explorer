@@ -57,6 +57,9 @@ var swapLandsatImages = function() {
       }
     $('div#landsat-container img').css('visibility', 'hidden');
     $('div#landsat-container img:eq(' + idx + ')').css('visibility', 'visible');
+	
+    $('div#landsat-container-two img').css('visibility', 'hidden');
+    $('div#landsat-container-two img:eq(' + idx + ')').css('visibility', 'visible');
   }
 
 function humanNumbers(n) {
