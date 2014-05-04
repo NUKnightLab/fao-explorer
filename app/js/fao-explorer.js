@@ -42,7 +42,8 @@ var prevIndex = undefined,
 	capitalStock = {},
 	topCrops = {},
 	compareItems,
-	values;
+	values,
+	is_playing = false;
 
 
 var initFAO = function() {
@@ -163,7 +164,9 @@ var initFAO = function() {
 	/* INIT STUFF
 	================================================== */
 	resizeLandsat();
-	
+	$("#play-button").click(function(){
+		playPause();
+	})
 }
 
 /* COMPARISON CHAR TINIT
@@ -202,6 +205,27 @@ var setChartHeight = function() {
 		};
     });
 };
+
+var playPause = function() {
+	
+	if (is_playing) {
+		pauseTime();
+		is_playing = false;
+	} else {
+		playTime();
+		is_playing = true;
+	}
+}
+var playTime = function() {
+	console.log("play");
+	$("#play-button").html("<span class='glyphicon glyphicon-pause'></span>");
+}
+
+var pauseTime = function() {
+	console.log("pause");
+	$("#play-button").html("Play");
+	$("#play-button").html("<span class='glyphicon glyphicon-play'></span>");
+}
 
 var humanNumbers = function(n) {
   if (n > 1000000000000) {
