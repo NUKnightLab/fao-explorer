@@ -81,23 +81,14 @@ var initFAO = function() {
     }
 
     var setChartHeight = function() {
-        console.log(yr);
-        console.log(capitalStock);
         var value = capitalStock[yr];
-        console.log(value);
-        var livestock = parseFloat(value['LIVESTOCK'] * 1000000)
-        var crops = parseFloat(value['CROPS'] * 1000000);
-        var sum = livestock + crops;
-        var livestockHeight = (livestock / sum) * 100;
-        var cropsHeight = (crops / sum) * 100;
-    
-        //console.log(livestockHeight);
-        //console.log(cropsHeight);
+        var livestockHeight = (value['LIVESTOCK'] / capitalStock.max) * 100;
+        var cropsHeight = (value['CROPS'] / capitalStock.max) * 100;
     
         $(compareItems[0]).css('height', livestockHeight + '%');
         $(compareItems[1]).css('height', cropsHeight + '%');
-        $(values[0]).html('$' + humanNumbers(livestock));
-        $(values[1]).html('$' + humanNumbers(crops));
+        $(values[0]).html('$' + humanNumbers(value['LIVESTOCK']));
+        $(values[1]).html('$' + humanNumbers(value['CROPS']));
     
 
     };
@@ -109,9 +100,16 @@ var initFAO = function() {
 
 
 	    $.getJSON("data/capital-stock/China-capital.json", function(data) {
+            var max = 0;
             for (var i = 0; i < data.length; i++) {
                 capitalStock[data[i].year] = data[i];
+                data[i].CROPS = parseFloat(data[i].CROPS * 1000000)
+                data[i].LIVESTOCK = parseFloat(data[i].LIVESTOCK * 1000000)
+                if (data[i].CROPS > max) { max = data[i].CROPS; }
+                if (data[i].LIVESTOCK > max) { max = data[i].LIVESTOCK; }
             }
+            capitalStock.max = max;
+            // $('div.compare-chart div.container div.row').css('height',)
 			setChartHeight();
 	    })
     }
