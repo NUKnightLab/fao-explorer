@@ -22,23 +22,29 @@
   <body data-spy="scroll" data-target=".subnav" data-offset="80">
     <!-- CHART THING-->
     <section>
-      <div class="compare-chart">
+      <div id="timeline-navbar">
+        <div id="timeline-item-container">
+        </div>
+      </div>
+      <div id="compare-chart">
         <div class="container">
           <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-4">
               <div class="compare-chart-item">
                 <div style="height:25%;" class="compare-chart-item-amount">
                   <div class="compare-chart-item-number">
-                    <p>500</p>
+                    <p>Livestock</p>
+                    <p class="value"></p>
                   </div>
                 </div>
               </div>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-4">
               <div class="compare-chart-item">
-                <div style="height:50%;" class="compare-chart-item-amount-second">
+                <div style="height:50%;" class="compare-chart-item-amount compare-chart-item-amount-second">
                   <div class="compare-chart-item-number">
-                    <p>750</p>
+                    <p>Crops</p></br>
+                    <p class="value"></p>
                   </div>
                 </div>
               </div>
@@ -49,6 +55,7 @@
     </section>
     <!-- JavaScript-->
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script type="text/javascript" src="js/d3.min.js"></script>
     <script type="text/javascript" src="js/fao-explorer.js?v10"></script>
     <!-- Remove this before publish-->
     <script type="text/javascript" src="js/holder.js"></script>
