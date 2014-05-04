@@ -19,10 +19,14 @@
 			display: none;
 		}
 		#y-axis {
-			/*margin-right: -100px;*/
+			display:block;
 		}
 		.d3plus_area text {
 			font-size: 15px !important;
+			fill: #fff !important;
+		}
+		div.d3plus_tooltip_container, div.d3plus_tooltip_arrow {
+			display: none;
 		}
 	</style>
 </head>
@@ -44,19 +48,15 @@
 	<script>
 		function viz(data, container) {
 			d3plus.viz()
-	    .container(container)  // container DIV to hold the visualization
-	    .data(data)  // data to use with the visualization
-	    .type("stacked")    // visualization type
-	    .id("type")         // key for which our data is unique on
-	    .text("type")       // key to use for display text
-	    .y("value")         // key to use for y-axis
-	    .x("Year", {
-	    	"scale": "continuous"
-	    })
-	    .style({
-	   		"background": "#000"
-	    })
-	    .draw()             // finally, draw the visualization!
+	    .container(container)
+	    .data(data)
+	    .type("stacked")
+	    .id("type")
+	    .text("type")
+	    .y("value")
+	    .x("Year")
+	    .color("color")
+	    .draw()
 		}
 		$(document).ready(function(){
 			viz(china, "#china");
