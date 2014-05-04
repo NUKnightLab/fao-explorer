@@ -6256,17 +6256,20 @@ figure figcaption.credit {
   height: 100px;
   width: 100%;
 }
-div#landsat-container {
+div#landsat-container,
+div#landsat-container-two {
   position: relative;
   height: 600px;
 }
-div#landsat-container img {
+div#landsat-container img,
+div#landsat-container-two img {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
 }
-div#landsat-container .landsat-label {
+div#landsat-container .landsat-label,
+div#landsat-container-two .landsat-label {
   width: 300px;
   font-size: 24px;
   font-weight: 200;
