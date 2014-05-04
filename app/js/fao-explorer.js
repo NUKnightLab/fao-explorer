@@ -43,6 +43,8 @@ $(document).ready(function(){
 		wrapper: '<div class="sticky-wrapper" />',
 		stuckClass: 'navbar-fixed-top'
 	});
+	
+	// add sticky switcher here
 
 	/* TIMELINE NAVBAR
 	================================================== */
@@ -78,7 +80,8 @@ $(document).ready(function(){
 		.draw()
 	}
 	
-	viz(china, "#china");
+	viz(china, "#navbar-chart-urban-rural");
+	viz(china, "#navbar-chart-population");
 	
 });
 

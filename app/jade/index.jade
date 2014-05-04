@@ -31,37 +31,71 @@ html(lang="en")
 		header.jumbotron
 			div.container
 				div.story-header
-					h1 Story Title 
+					h1 China
 						//small Deck goes here
-					p.lead Deck goes here
+					// p.lead Deck goes here
 
-		// GOOGLE EARTH ENGINE
+		// Satellite Images
+		section
+			div#landsat-container
+				img.img-responsive(src="img/Shanghai/shanghai_01.jpg")
+				img.img-responsive(src="img/Shanghai/shanghai_02.jpg")
+				img.img-responsive(src="img/Shanghai/shanghai_03.jpg")
+				img.img-responsive(src="img/Shanghai/shanghai_04.jpg")
+				img.img-responsive(src="img/Shanghai/shanghai_05.jpg")
+				img.img-responsive(src="img/Shanghai/shanghai_06.jpg")
+				img.img-responsive(src="img/Shanghai/shanghai_07.jpg")
+				img.img-responsive(src="img/Shanghai/shanghai_08.jpg")
+				img.img-responsive(src="img/Shanghai/shanghai_09.jpg")
+				img.img-responsive(src="img/Shanghai/shanghai_10.jpg")
+				img.img-responsive(src="img/Shanghai/shanghai_11.jpg")
+				img.img-responsive(src="img/Shanghai/shanghai_12.jpg")
+				img.img-responsive(src="img/Shanghai/shanghai_13.jpg")
+				img.img-responsive(src="img/Shanghai/shanghai_14.jpg")
+				img.img-responsive(src="img/Shanghai/shanghai_15.jpg")
+				img.img-responsive(src="img/Shanghai/shanghai_16.jpg")
+				img.img-responsive(src="img/Shanghai/shanghai_17.jpg")
+				img.img-responsive(src="img/Shanghai/shanghai_18.jpg")
+				img.img-responsive(src="img/Shanghai/shanghai_19.jpg")
+				img.img-responsive(src="img/Shanghai/shanghai_20.jpg")
+				img.img-responsive(src="img/Shanghai/shanghai_21.jpg")
+				img.img-responsive(src="img/Shanghai/shanghai_22.jpg")
+				img.img-responsive(src="img/Shanghai/shanghai_23.jpg")
+				img.img-responsive(src="img/Shanghai/shanghai_24.jpg")
+				img.img-responsive(src="img/Shanghai/shanghai_25.jpg")
 
-		section.container
-			div.row
-				div.col-md-12
-					p.lead
-						| Paragraph text with lead class. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Morbi commodo, ipsum sed pharetra gravida, orci magna rhoncus neque, id pulvinar odio lorem non turpis. Nullam sit amet enim. Suspendisse id velit vitae ligula volutpat condimentum. Aliquam erat volutpat.
-					// NAVBAR
-					div#navbar-main
-						div.navbar.navbar-default#main-nav(role="navigation")
-							div
-								div.navbar-header
-									button.navbar-toggle(type="button", data-toggle="collapse", data-target=".navbar-collapse")
-										span.sr-only Toggle navigation
-										span.icon-bar
-										span.icon-bar
-										span.icon-bar
-									a.masthead(href="#") Knight Lab FAO Explorer
-								// Navbar Links etc
-								div.navbar-collapse.collapse
-									ul.nav.navbar-nav
-										li
-											a(href="#home") Stuff
-								div.viz#china
+		// NAVBAR
+		section
+			div#navbar-main
+				div.navbar.navbar-default#main-nav(role="navigation")
+					div#timeline-navbar
+						div#timeline-item-container
+					div
+						div.viz#navbar-chart-population
+
 								
-
-		// Large image in Outside Grid
+		// CHART THING
+		section
+			div.compare-chart
+				div.container
+					div.row
+						div.col-md-6
+							div.compare-chart-item
+								div.compare-chart-item-amount(style="height:25%;")
+									div.compare-chart-item-number
+										p 500
+						div.col-md-6
+							div.compare-chart-item
+								div.compare-chart-item-amount-second(style="height:50%;")
+									div.compare-chart-item-number
+										p 750
+		// NAVBAR
+		section
+			div#navbar-main
+				div.navbar.navbar-default#nav-population(role="navigation")
+					div
+						div.viz#navbar-chart-urban-rural
+		// Filler
 		section.container
 			p Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Morbi commodo, ipsum sed pharetra gravida, orci magna rhoncus neque, id pulvinar odio lorem non turpis. Nullam sit amet enim. Suspendisse id velit vitae ligula volutpat condimentum. Aliquam erat volutpat. Sed quis velit. Nulla facilisi. Nulla libero. Vivamus pharetra posuere sapien. Nam consectetuer. Sed aliquam, nunc eget euismod ullamcorper, lectus nunc ullamcorper orci, fermentum bibendum enim nibh eget ipsum. Donec porttitor ligula eu dolor. Maecenas vitae nulla consequat libero cursus venenatis. Nam magna enim, accumsan eu, blandit sed, blandit a, eros.
 
