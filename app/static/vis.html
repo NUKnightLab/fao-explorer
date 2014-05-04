@@ -19,10 +19,14 @@
 			display: none;
 		}
 		#y-axis {
-			/*margin-right: -100px;*/
+			display:block;
 		}
 		.d3plus_area text {
 			font-size: 15px !important;
+			fill: #fff !important;
+		}
+		div.d3plus_tooltip_container, div.d3plus_tooltip_arrow {
+			display: none;
 		}
 	</style>
 </head>
@@ -50,13 +54,11 @@
 	    .id("type")         // key for which our data is unique on
 	    .text("type")       // key to use for display text
 	    .y("value")         // key to use for y-axis
-	    .x("Year", {
-	    	"scale": "continuous"
-	    })
-	    .style({
-	   		"background": "#000"
-	    })
+	    .x("Year")
+	    .color("color")
 	    .draw()             // finally, draw the visualization!
+
+	    // viz.style({"font", "family", "Helvetica"});
 		}
 		$(document).ready(function(){
 			viz(china, "#china");
