@@ -2528,33 +2528,33 @@ https://github.com/imakewebthings/jquery-waypoints/blob/master/licenses.txt
 ********************************************** */
 
 /*
-== malihu jquery custom scrollbars plugin == 
-version: 2.8.3 
-author: malihu (http://manos.malihu.gr) 
-plugin home: http://manos.malihu.gr/jquery-custom-content-scroller 
+== malihu jquery custom scrollbars plugin ==
+version: 2.8.3
+author: malihu (http://manos.malihu.gr)
+plugin home: http://manos.malihu.gr/jquery-custom-content-scroller
 */
 
 /*
-Copyright 2010-2013 Manos Malihutsakis 
+Copyright 2010-2013 Manos Malihutsakis
 
-This program is free software: you can redistribute it and/or modify 
-it under the terms of the GNU Lesser General Public License as published by 
-the Free Software Foundation, either version 3 of the License, or 
-any later version. 
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU Lesser General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+any later version.
 
-This program is distributed in the hope that it will be useful, 
-but WITHOUT ANY WARRANTY; without even the implied warranty of 
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the 
-GNU Lesser General Public License for more details. 
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU Lesser General Public License for more details.
 
-You should have received a copy of the GNU Lesser General Public License 
-along with this program.  If not, see http://www.gnu.org/licenses/lgpl.html. 
+You should have received a copy of the GNU Lesser General Public License
+along with this program.  If not, see http://www.gnu.org/licenses/lgpl.html.
 */
 (function($){
 	/*plugin script*/
 	var methods={
 		init:function(options){
-			var defaults={ 
+			var defaults={
 				set_width:false, /*optional element width: boolean, pixels, percentage*/
 				set_height:false, /*optional element height: boolean, pixels, percentage*/
 				horizontalScroll:false, /*scroll horizontally: boolean*/
@@ -2988,7 +2988,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/lgpl.html.
 							mouseWheelPixels=100+Math.round($this.data("scrollAmount")/2);
 						}
 						if($this.data("horizontalScroll")){
-							draggerPos=mCSB_dragger.position().left; 
+							draggerPos=mCSB_dragger.position().left;
 							limit=mCSB_draggerContainer.width()-mCSB_dragger.width();
 							absPos=Math.abs(mCSB_container.position().left);
 						}
@@ -3065,7 +3065,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/lgpl.html.
 								$this.data({"mCSB_buttonScrollLeft":setInterval(function(){
 									$this.mCustomScrollbar("scrollTo",Math.abs(mCSB_container.position().left)-scrollButtonsSpeed,{trigger:"internal",scrollEasing:"easeOutCirc"});
 								},17)});
-							});	
+							});
 							var mCSB_buttonLeft_stop=function(e){
 								e.preventDefault(); clearInterval($this.data("mCSB_buttonScrollLeft"));
 							}
@@ -3095,7 +3095,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/lgpl.html.
 								$this.data({"mCSB_buttonScrollUp":setInterval(function(){
 									$this.mCustomScrollbar("scrollTo",Math.abs(mCSB_container.position().top)-scrollButtonsSpeed,{trigger:"internal",scrollEasing:"easeOutCirc"});
 								},17)});
-							});	
+							});
 							var mCSB_buttonUp_stop=function(e){
 								e.preventDefault(); clearInterval($this.data("mCSB_buttonScrollUp"));
 							}
@@ -3540,20 +3540,36 @@ $(document).ready(function(){
 
 	/* TIMELINE NAVBAR
 	================================================== */
-		$("#timeline-navbar").mCustomScrollbar({
-            scrollInertia: 0,
-			horizontalScroll:true,
-            autoDraggerLength: false,
-			advanced:{autoExpandHorizontalScroll:false,updateOnContentResize:false},
-            scrollButtons: { enable: false },
-            contentTouchScroll: true,
-            callbacks:{
-                whileScrolling:function(){
-                    var yr = 1985 + Math.floor(25 * (mcs.leftPct/100));
-                    $(".mCSB_dragger_bar").html( yr );
-                }
-            }
-		});
+
+  var prevIndex = undefined;
+
+  $("#timeline-navbar").mCustomScrollbar({
+    scrollInertia: 0,
+    horizontalScroll:true,
+    autoDraggerLength: false,
+    advanced:{autoExpandHorizontalScroll:false,updateOnContentResize:false},
+    scrollButtons: { enable: false },
+    contentTouchScroll: true,
+    callbacks:{
+      whileScrolling:function(){
+        var yr = 1985 + Math.floor(25 * (mcs.leftPct/100));
+        $(".mCSB_dragger_bar").html( yr );
+      },
+      onScroll: function() {
+        var idx = Math.ceil(25 * (mcs.leftPct/100)) - 1;
+
+        // optimization 
+        if (prevIndex === undefined || prevIndex === idx) {
+          prevIndex = idx;
+          return;
+        }
+//        console.log($(".mCSB_dragger_bar").html(), idx);
+        $('div#landsat-container img').css('visibility', 'hidden');
+        $('div#landsat-container img:eq(' + idx + ')').css('visibility', 'visible');
+      }
+
+    }
+  });
 
         $(".mCSB_dragger_bar").html("1985");
 

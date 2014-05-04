@@ -6251,3 +6251,12 @@ figure figcaption.credit {
 div.navbar.navbar-fixed-top.subnav {
   top: 61px !important;
 }
+
+div#landsat-container {
+  position: relative;
+}
+
+div#landsat-container > img {
+  position: absolute;
+  top: 0; left: 0;
+}
