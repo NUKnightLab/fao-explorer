@@ -3543,6 +3543,67 @@ $(document).ready(function(){
 
   var prevIndex = undefined;
 
+  var yr = 1985;
+
+  var capitalStock = {};
+
+  function humanNumbers(n) {
+      if (n > 1000000000000) {
+          n = n/1000000000000.0
+          return n.toFixed(2) + " trillion";
+      }
+      if (n > 1000000000) {
+          n = n/1000000000.0
+          return n.toFixed(2) + " billion";
+      }
+      if (n > 1000000) {
+          n = n/1000000.0
+          return n.toFixed(2) + " million";
+      }
+      return n.toFixed(0);
+  }
+
+  var setChartHeight = function() {
+    $.each(capitalStock, function(index, value) {
+      if (value['year'] == yr) {
+        var livestock = parseFloat(value['LIVESTOCK'] * 1000000)
+        var crops = parseFloat(value['CROPS'] * 1000000);
+        var sum = livestock + crops;
+        var livestockHeight = (livestock / sum) * 100;
+        var cropsHeight = (crops / sum) * 100;
+
+        $(compareItems[0]).css('height', livestockHeight + '%');
+        $(compareItems[1]).css('height', cropsHeight + '%');
+        $(values[0]).html('$' + humanNumbers(livestock));
+        $(values[1]).html('$' + humanNumbers(crops));
+      };
+    });
+  };
+
+  var swapLandsatImages = function() {
+    var idx = Math.ceil(25 * (mcs.leftPct/100)) - 1;
+
+    // optimization
+    if (prevIndex === undefined || prevIndex === idx) {
+        prevIndex = idx;
+        return;
+      }
+    $('div#landsat-container img').css('visibility', 'hidden');
+    $('div#landsat-container img:eq(' + idx + ')').css('visibility', 'visible');
+  }
+
+  if ($('div#compare-chart')) {
+    var compareItems = $('.compare-chart-item-amount');
+    var values = $('.value');
+
+
+    $.getJSON("data/capital-stock/China-capital.json", function(data) {
+      capitalStock = data;
+      setChartHeight();
+    })
+
+  }
+
   $("#timeline-navbar").mCustomScrollbar({
     scrollInertia: 0,
     horizontalScroll:true,
@@ -3552,25 +3613,21 @@ $(document).ready(function(){
     contentTouchScroll: true,
     callbacks:{
       whileScrolling:function(){
-        var yr = 1985 + Math.floor(25 * (mcs.leftPct/100));
+        yr = 1985 + Math.floor(25 * (mcs.leftPct/100));
         $(".mCSB_dragger_bar").html( yr );
       },
       onScroll: function() {
-        var idx = Math.ceil(25 * (mcs.leftPct/100)) - 1;
-
-        // optimization 
-        if (prevIndex === undefined || prevIndex === idx) {
-          prevIndex = idx;
-          return;
+        if ($('div#compare-chart')) {
+          setChartHeight();
         }
-//        console.log($(".mCSB_dragger_bar").html(), idx);
-        $('div#landsat-container img').css('visibility', 'hidden');
-        $('div#landsat-container img:eq(' + idx + ')').css('visibility', 'visible');
-      }
 
+        if ($('div#landsat-container')) {
+          swapLandsatImages();
+        }
+      }
     }
   });
 
-        $(".mCSB_dragger_bar").html("1985");
+  $(".mCSB_dragger_bar").html("1985");
 
 });
