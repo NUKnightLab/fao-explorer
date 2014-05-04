@@ -35,6 +35,16 @@
 // @codekit-prepend "library/jquery.mCustomScrollbar.js";
 
 
+/* DAMN GLOBAL VARIABLES
+================================================== */
+var prevIndex = undefined,
+	yr = 1985,
+	capitalStock = {},
+	topCrops = {},
+	compareItems,
+	values;
+
+
 var initFAO = function() {
 	/* WAYPOINTS
 	================================================== */
@@ -57,12 +67,7 @@ var initFAO = function() {
         $('div#landsat-container img').css('visibility', 'hidden');
         $('div#landsat-container img:eq(' + idx + ')').css('visibility', 'visible');
       }
-    var prevIndex = undefined; // used for landsat
-
-    var yr = 1985;
-
-    var capitalStock = {};
-    var topCrops = {};
+    
 
     function humanNumbers(n) {
       if (n > 1000000000000) {
@@ -83,7 +88,7 @@ var initFAO = function() {
     var setChartHeight = function() {
         $.each(capitalStock, function(index, value) {
 			console.log(yr);
-			if (value['year'] == yr) {
+			if (value['year'] == yr && compareItems) {
 	            var livestock = parseFloat(value['LIVESTOCK'] * 1000000)
 	            var crops = parseFloat(value['CROPS'] * 1000000);
 	            var sum = livestock + crops;
@@ -102,24 +107,27 @@ var initFAO = function() {
         });
     };
 
-    // -- initialize for comparison chart
-    if ($('.compare-chart')) {
-	    var compareItems = $('.compare-chart-item-amount');
-	    var values = $('.value');
+	/* INIT COMPARISON CHART
+	================================================== */
+	
+	function compareChartInit(the_data_url) {
+	    if ($('.compare-chart')) {
+		    compareItems = $('.compare-chart-item-amount');
+		    values = $('.value');
 
 
-	    $.getJSON("data/capital-stock/China-capital.json", function(data) {
-			capitalStock = data;
-			console.log(data);
-			setChartHeight();
-	    })
-    }
+		    $.getJSON(the_data_url, function(data) {
+				capitalStock = data;
+				console.log(data);
+				setChartHeight();
+		    })
+	    }
+	}
+   
+	
 
-    // -- end initialize    
-
-
-
-
+	/* SCROLLBAR
+	================================================== */
     $("#timeline-navbar").mCustomScrollbar({
     	scrollInertia: 0,
     	horizontalScroll:true,
@@ -155,12 +163,19 @@ var initFAO = function() {
 				
 				$('div#landsat-container img').css('visibility', 'hidden');
 			 	$('div#landsat-container img:eq(' + idx + ')').css('visibility', 'visible');
+				
+				var dragger = $(".mCSB_dragger");
+				var dragger_position = dragger.position();
+				console.log(dragger_position.left);
+				
 			}
 			
 		}
 	});
 	
 	 $(".mCSB_dragger_bar").html("1985");
+	 
+
 	
 	/* TIMELINE NAVBAR CHART
 	================================================== */
@@ -193,6 +208,11 @@ var initFAO = function() {
 	$( window ).resize(function() {
 		resizeLandsat();
 	});
+	
+	/* INIT STUFF
+	================================================== */
+	resizeLandsat();
+	compareChartInit("data/capital-stock/China-capital.json");
 }
 
 /* Utlities
