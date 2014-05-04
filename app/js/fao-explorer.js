@@ -290,11 +290,12 @@ var ratioHeight = function(width, ratio_width, ratio_height) {
             animation: false
         }]
     function drawchart(time, country, container) {
+        var margin_sides = -1 * ($(document).width() * 0.2);
     $(container).highcharts({
         chart: {
             type: 'area',
             animation: false,
-            margin: [0, -80, 0, -80]
+            margin: [0, margin_sides, 0, margin_sides]
         },
         colors: ['#00A383', '#4671D5', '#00A383', '#FF7640', '#f7a35c', '#8085e9', '#f15c80', '#e4d354', '#8085e8', '#8d4653', '#91e8e1'
         ],
@@ -344,11 +345,12 @@ var ratioHeight = function(width, ratio_width, ratio_height) {
         legend: {
             align: "center",
             layout: "vertical", 
-            itemMarginTop: 40,
+            itemMarginTop: 18,
             itemStyle: {color: "#fff", fontWeight: "light", fontSize: "14px", fontFamily: "Helvetica"},
             symbolHeight: 0,
             symbolWidth: 0,
-            maxHeight: 500
+            maxHeight: 500,
+            useHTML: true
 
         }
     });
