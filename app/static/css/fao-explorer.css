@@ -5556,6 +5556,8 @@ input[type="color"]:focus,
 }
 div.navbar {
   text-align: center;
+  border-top: 3px solid #333;
+  border-bottom: 3px solid #333;
 }
 div.navbar a.masthead {
   font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -6189,7 +6191,7 @@ figure figcaption.credit {
   position: absolute;
   width: 10px;
   height: 100%;
-  background-color: #000;
+  background-color: #EEE;
   top: 0;
   left: 50px;
   z-index: 9;
@@ -6214,12 +6216,12 @@ figure figcaption.credit {
   -webkit-border-radius: 0px;
   -moz-border-radius: 0px;
   border-radius: 0px;
-  background-color: #CCC;
+  background-color: #333;
 }
 .mCSB_horizontal > .mCSB_scrollTools .mCSB_dragger {
   width: 120px;
   height: 100%;
-  color: #CCC;
+  color: #333;
   z-index: 10;
   /*border-radius:7px;
     -webkit-border-radius:7px;
@@ -6235,7 +6237,7 @@ figure figcaption.credit {
   /* year label */
   font-family: Helvetica;
   font-size: 30px;
-  background-color: #000;
+  background-color: #EEE;
   border-radius: 7px;
   -webkit-border-radius: 7px;
   -moz-border-radius: 7px;
@@ -6324,6 +6326,7 @@ div#landsat-container-two .landsat-label {
   display: table;
   height: 100%;
   width: 100%;
+  padding-bottom: 10px;
 }
 .compare-chart .compare-chart-item .compare-chart-item-amount .compare-chart-item-number p,
 .compare-chart .compare-chart-item .compare-chart-item-amount-second .compare-chart-item-number p,

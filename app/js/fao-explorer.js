@@ -281,11 +281,11 @@ var ratioHeight = function(width, ratio_width, ratio_height) {
 // plug in highcharts
     years = ['1985', '1990', '1995', '2000', '2005', '2010']
     china = [{
-            name: 'Rural',
+            name: 'Rural Population',
             data: [819033,857756,853896,820755,757952,690789],
             animation: false
         }, {
-            name: 'Urban',
+            name: 'Urban Population',
             data: [243266,307673,383635,459674,560225,669032],
             animation: false
         }]
@@ -296,7 +296,7 @@ var ratioHeight = function(width, ratio_width, ratio_height) {
             type: 'area',
             animation: false,
             margin: [0, margin_sides, 0, margin_sides],
-            backgroundColor: "#ddd"
+            backgroundColor: "#333"
         },
         colors: ['#00A383', '#4671D5', '#00A383', '#FF7640', '#f7a35c', '#8085e9', '#f15c80', '#e4d354', '#8085e8', '#8d4653', '#91e8e1'
         ],
