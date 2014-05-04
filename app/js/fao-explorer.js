@@ -30,7 +30,7 @@
 // @codekit-prepend "library/india.js";
 
 // @codekit-prepend "library/d3.js";
-// @codekit-prepend "library/d3plus.js";
+// codekit-prepend "library/d3plus.js";
 
 // @codekit-prepend "library/jquery.mCustomScrollbar.js";
 
@@ -45,34 +45,55 @@ var prevIndex = undefined,
 	values,
 	is_playing = false;
 
+var swapLandsatImages = function() {
+    var idx = Math.ceil(25 * (mcs.leftPct/100)) - 1;
 
-var initFAO = function() {
-	/* WAYPOINTS
-	================================================== */
-	$('#main-nav').waypoint('sticky', {
-		offset: 50,
-		wrapper: '<div class="sticky-wrapper" />',
-		stuckClass: 'navbar-fixed-top'
-	});
-	
-	// add sticky switcher here 
-
-    var swapLandsatImages = function() {
-        var idx = Math.ceil(25 * (mcs.leftPct/100)) - 1;
-
-        // optimization
-        if (prevIndex === undefined || prevIndex === idx) {
-            prevIndex = idx;
-            return;
-          }
-        $('div#landsat-container img').css('visibility', 'hidden');
-        $('div#landsat-container img:eq(' + idx + ')').css('visibility', 'visible');
+    // optimization
+    if (prevIndex === undefined || prevIndex === idx) {
+        prevIndex = idx;
+        return;
       }
-    
+    $('div#landsat-container img').css('visibility', 'hidden');
+    $('div#landsat-container img:eq(' + idx + ')').css('visibility', 'visible');
+  }
 
-    
+function humanNumbers(n) {
+  if (n > 1000000000000) {
+      n = n/1000000000000.0
+      return n.toFixed(2) + " trillion";
+  }
+  if (n > 1000000000) {
+      n = n/1000000000.0
+      return n.toFixed(2) + " billion";
+  }
+  if (n > 1000000) {
+      n = n/1000000.0
+      return n.toFixed(2) + " million";
+  }
+  return n.toFixed(0);
+}
 
-   
+    var setChartHeight = function() {
+        var value = capitalStock[yr];
+        var livestockHeight = (value['LIVESTOCK'] / capitalStock.max) * 100;
+        var cropsHeight = (value['CROPS'] / capitalStock.max) * 100;
+
+        $(compareItems[0]).css('height', livestockHeight + '%');
+        $(compareItems[1]).css('height', cropsHeight + '%');
+        $(values[0]).html('$' + humanNumbers(value['LIVESTOCK']));
+        $(values[1]).html('$' + humanNumbers(value['CROPS']));
+
+
+    };
+
+    var initFAO = function() {
+    	/* WAYPOINTS
+    	================================================== */
+    	$('#main-nav').waypoint('sticky', {
+    		offset: 50,
+    		wrapper: '<div class="sticky-wrapper" />',
+    		stuckClass: 'navbar-fixed-top'
+    	});
 
 	
    
@@ -90,7 +111,6 @@ var initFAO = function() {
     	callbacks:{
 			
     		whileScrolling:function(){
-				console.log("whileScrolling")
     			yr = 1985 + Math.floor(25 * (mcs.leftPct/100));
     			$(".mCSB_dragger_bar").html( yr );
 				
@@ -105,7 +125,6 @@ var initFAO = function() {
                   swapLandsatImages();
                 }
 
-				console.log("HEY")
     			var idx = Math.ceil(25 * (mcs.leftPct/100)) - 1;
    			 	// optimization 
    			 	if (prevIndex === undefined || prevIndex === idx) {
@@ -131,21 +150,21 @@ var initFAO = function() {
 	
 	/* TIMELINE NAVBAR CHART
 	================================================== */
-	function viz(data, container) {
-		d3plus.viz()
-		.container(container)
-		.data(data)
-		.type("stacked")
-		.id("type")
-		.text("type")
-		.y("value")
-		.x("Year")
-		.color("color")
-		.draw()
-	}
+	// function viz(data, container) {
+	// 	d3plus.viz()
+	// 	.container(container)
+	// 	.data(data)
+	// 	.type("stacked")
+	// 	.id("type")
+	// 	.text("type")
+	// 	.y("value")
+	// 	.x("Year")
+	// 	.color("color")
+	// 	.draw()
+	// }
 	
-	viz(china, "#navbar-chart-urban-rural");
-	viz(china, "#navbar-chart-population");
+	// viz(china, "#navbar-chart-urban-rural");
+	// viz(china, "#navbar-chart-population");
 	
 	
 	/* RESIZE LANDSAT
@@ -178,33 +197,19 @@ var compareChartInit = function(the_data_url) {
 
 
 	    $.getJSON(the_data_url, function(data) {
-			capitalStock = data;
-			console.log(data);
-			setChartHeight();
+            var max = 0;
+            for (var i = 0; i < data.length; i++) {
+                capitalStock[data[i].year] = data[i];
+                data[i].CROPS = parseFloat(data[i].CROPS * 1000000)
+                data[i].LIVESTOCK = parseFloat(data[i].LIVESTOCK * 1000000)
+                if (data[i].CROPS > max) { max = data[i].CROPS; }
+                if (data[i].LIVESTOCK > max) { max = data[i].LIVESTOCK; }
+            }
+            capitalStock.max = max;
+            setChartHeight();
 	    })
     }
 }
-var setChartHeight = function() {
-    $.each(capitalStock, function(index, value) {
-		console.log(yr);
-		if (value['year'] == yr && compareItems) {
-            var livestock = parseFloat(value['LIVESTOCK'] * 1000000)
-            var crops = parseFloat(value['CROPS'] * 1000000);
-            var sum = livestock + crops;
-            var livestockHeight = (livestock / sum) * 100;
-            var cropsHeight = (crops / sum) * 100;
-		
-			//console.log(livestockHeight);
-			//console.log(cropsHeight);
-		
-            $(compareItems[0]).css('height', livestockHeight + '%');
-            $(compareItems[1]).css('height', cropsHeight + '%');
-            $(values[0]).html('$' + humanNumbers(livestock));
-            $(values[1]).html('$' + humanNumbers(crops));
-		
-		};
-    });
-};
 
 var playPause = function() {
 	
