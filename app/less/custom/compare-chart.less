@@ -7,10 +7,11 @@
 
 .compare-chart {
 	.compare-chart-item{
-		background-color: #FCFCFC; 
+		background-color: #EEE; 
 		height:300px;
 		position:relative;
 		width:100%;
+		border-left: 1px solid #999;
 		.compare-chart-item-amount, .compare-chart-item-amount-second {
 			height:100%;
 			width:100%;
@@ -20,9 +21,13 @@
 				display:table;
 				height:100%;
 				width:100%;
+				p, p.label {
+					font-size:18px;
+					color:#333;
+				}
 				p {
 					display:table-cell;
-					vertical-align:middle;
+					vertical-align:bottom;
 					text-align:center;
 					
 					
