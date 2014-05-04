@@ -295,7 +295,8 @@ var ratioHeight = function(width, ratio_width, ratio_height) {
         chart: {
             type: 'area',
             animation: false,
-            margin: [0, margin_sides, 0, margin_sides]
+            margin: [0, margin_sides, 0, margin_sides],
+            backgroundColor: "#ddd"
         },
         colors: ['#00A383', '#4671D5', '#00A383', '#FF7640', '#f7a35c', '#8085e9', '#f15c80', '#e4d354', '#8085e8', '#8d4653', '#91e8e1'
         ],
