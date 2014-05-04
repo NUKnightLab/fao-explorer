@@ -281,11 +281,11 @@ var ratioHeight = function(width, ratio_width, ratio_height) {
 // plug in highcharts
     years = ['1985', '1990', '1995', '2000', '2005', '2010']
     china = [{
-            name: 'Rural',
+            name: 'Rural pop.',
             data: [819033,857756,853896,820755,757952,690789],
             animation: false
         }, {
-            name: 'Urban',
+            name: 'Urban pop.',
             data: [243266,307673,383635,459674,560225,669032],
             animation: false
         }]
