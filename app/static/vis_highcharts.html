@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Chartsss</title>
+	<style type="text/css">
+        body {
+            height: 2000px;
+        }
+		#container {
+			width: 100%;
+			height: 150px;
+		}
+	</style>
+</head>
+<body>
+	<h1>Chartssss</h1>
+	<div id="container"></div>
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+	<script src="http://code.highcharts.com/highcharts.js"></script>
+	<script type="text/javascript">
+        years = ['1985', '1990', '1995', '2000', '2005', '2010']
+        china = [{
+                name: 'Rural',
+                data: [819033,857756,853896,820755,757952,690789],
+                animation: false
+            }, {
+                name: 'Urban',
+                data: [243266,307673,383635,459674,560225,669032],
+                animation: false
+            }]
+		function drawchart(time, country, container) {
+        $(container).highcharts({
+            chart: {
+                type: 'area',
+                animation: false,
+                margin: [0, -80, 0, -80]
+            },
+            colors: ['#00A383', '#4671D5', '#00A383', '#FF7640', '#f7a35c', '#8085e9', '#f15c80', '#e4d354', '#8085e8', '#8d4653', '#91e8e1'
+            ],
+            title: {
+                text: ''
+            },
+            xAxis: {
+                categories: years,
+                tickmarkPlacement: 'off',
+                title: {
+                    enabled: false
+                }
+            },
+            yAxis: {
+                title: {
+                    text: 'Population (Billion)'
+                },
+                labels: {
+                    formatter: function() {
+                        return this.value / 1000000;
+                    }
+                }
+            },
+            tooltip: {
+                enabled: false,
+                animation: false
+            },
+            plotOptions: {
+                area: {
+                    stacking: 'normal',
+                    lineColor: '#666666',
+                    lineWidth: 1,
+                    marker: {
+                        lineWidth: 0,
+                        lineColor: '#666666',
+                        symbol: 'circle',
+                        radius: 2
+                    }
+                }
+            },
+            series: country,
+            legend: {
+                // enabled: false
+            }
+        });
+    };
+    
+    $(document).ready(function(){
+        drawchart(years, china, '#container');
+
+        txt = $("text")
+        len = txt.length
+        txt[len - 1].remove()
+    })
+	</script>
+
+</body>
+</html>
