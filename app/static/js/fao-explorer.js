@@ -3546,6 +3546,7 @@ $(document).ready(function(){
   var yr = 1985;
 
   var capitalStock = {};
+  var topCrops = {};
 
   function humanNumbers(n) {
       if (n > 1000000000000) {
@@ -3580,6 +3581,62 @@ $(document).ready(function(){
     });
   };
 
+  var drawStreamgraph = function() {
+    var n = 10, // number of layers
+        m = 25, // number of samples per layer
+        stack = d3.layout.stack()
+          .offset("wiggle")
+
+    /*
+      Each item in the array is an object with an x and a y.
+      We need to pull these objects higher in the stack
+      so d3 can iterate over them properly and attach a
+      y0 value for the offset of the streamgraph.
+    */
+
+    var layers = stack(d3.values(topCrops).map(function(d) { return d[0]; }));
+
+    /*
+      Using the map function available to arrays,
+      grab all of the years from the first stack.
+    */
+    var years = layers[0].map(function(d) { return d.x });
+
+    var width = 960,
+        height = 500;
+
+    var x = d3.scale.linear()
+        .domain([d3.min(years), d3.max(years)])
+        .range([0, width]);
+
+    var y = d3.scale.linear()
+        .domain([0, d3.max(layers, function(layer) {
+          return d3.max(layer, function(d) {
+            return d.y0 + d.y;
+          });
+        })])
+        .range([height, 0]);
+
+    var color = d3.scale.linear()
+        .range(["#aad", "#556"]);
+
+    var area = d3.svg.area()
+        .x(function(d) { return x(d.x); })
+        .y0(function(d) { return y(d.y0); })
+        .y1(function(d) { return y(d.y0 + d.y); });
+
+    var svg = d3.select("#streamgraph").append("svg")
+        .attr("width", width)
+        .attr("height", height);
+
+    svg.selectAll("path")
+        .data(layers)
+      .enter().append("path")
+        .attr("d", area)
+        .style("fill", function() { return color(Math.random()); });
+  }
+
+
   var swapLandsatImages = function() {
     var idx = Math.ceil(25 * (mcs.leftPct/100)) - 1;
 
@@ -3602,6 +3659,13 @@ $(document).ready(function(){
       setChartHeight();
     })
 
+    if ($('#streamgraph')) {
+      $.getJSON("data/crops/China-topcrops.json", function(data) {
+        topCrops = data;
+        drawStreamgraph();
+      });
+      console.log('doah');
+    }
   }
 
   $("#timeline-navbar").mCustomScrollbar({
