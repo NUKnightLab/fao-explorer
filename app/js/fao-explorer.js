@@ -30,7 +30,7 @@
 // @codekit-prepend "library/india.js";
 
 // @codekit-prepend "library/d3.js";
-// @codekit-prepend "library/d3plus.js";
+// codekit-prepend "library/d3plus.js";
 
 // @codekit-prepend "library/jquery.mCustomScrollbar.js";
 
@@ -81,25 +81,25 @@ var initFAO = function() {
     }
 
     var setChartHeight = function() {
-        $.each(capitalStock, function(index, value) {
-			console.log(yr);
-			if (value['year'] == yr) {
-	            var livestock = parseFloat(value['LIVESTOCK'] * 1000000)
-	            var crops = parseFloat(value['CROPS'] * 1000000);
-	            var sum = livestock + crops;
-	            var livestockHeight = (livestock / sum) * 100;
-	            var cropsHeight = (crops / sum) * 100;
-			
-				//console.log(livestockHeight);
-				//console.log(cropsHeight);
-			
-	            $(compareItems[0]).css('height', livestockHeight + '%');
-	            $(compareItems[1]).css('height', cropsHeight + '%');
-	            $(values[0]).html('$' + humanNumbers(livestock));
-	            $(values[1]).html('$' + humanNumbers(crops));
-			
-			};
-        });
+        console.log(yr);
+        console.log(capitalStock);
+        var value = capitalStock[yr];
+        console.log(value);
+        var livestock = parseFloat(value['LIVESTOCK'] * 1000000)
+        var crops = parseFloat(value['CROPS'] * 1000000);
+        var sum = livestock + crops;
+        var livestockHeight = (livestock / sum) * 100;
+        var cropsHeight = (crops / sum) * 100;
+    
+        //console.log(livestockHeight);
+        //console.log(cropsHeight);
+    
+        $(compareItems[0]).css('height', livestockHeight + '%');
+        $(compareItems[1]).css('height', cropsHeight + '%');
+        $(values[0]).html('$' + humanNumbers(livestock));
+        $(values[1]).html('$' + humanNumbers(crops));
+    
+
     };
 
     // -- initialize for comparison chart
@@ -109,8 +109,9 @@ var initFAO = function() {
 
 
 	    $.getJSON("data/capital-stock/China-capital.json", function(data) {
-			capitalStock = data;
-			console.log(data);
+            for (var i = 0; i < data.length; i++) {
+                capitalStock[data[i].year] = data[i];
+            }
 			setChartHeight();
 	    })
     }
@@ -130,7 +131,6 @@ var initFAO = function() {
     	callbacks:{
 			
     		whileScrolling:function(){
-				console.log("whileScrolling")
     			yr = 1985 + Math.floor(25 * (mcs.leftPct/100));
     			$(".mCSB_dragger_bar").html( yr );
 				
@@ -145,7 +145,6 @@ var initFAO = function() {
                   swapLandsatImages();
                 }
 
-				console.log("HEY")
     			var idx = Math.ceil(25 * (mcs.leftPct/100)) - 1;
    			 	// optimization 
    			 	if (prevIndex === undefined || prevIndex === idx) {
@@ -164,21 +163,21 @@ var initFAO = function() {
 	
 	/* TIMELINE NAVBAR CHART
 	================================================== */
-	function viz(data, container) {
-		d3plus.viz()
-		.container(container)
-		.data(data)
-		.type("stacked")
-		.id("type")
-		.text("type")
-		.y("value")
-		.x("Year")
-		.color("color")
-		.draw()
-	}
+	// function viz(data, container) {
+	// 	d3plus.viz()
+	// 	.container(container)
+	// 	.data(data)
+	// 	.type("stacked")
+	// 	.id("type")
+	// 	.text("type")
+	// 	.y("value")
+	// 	.x("Year")
+	// 	.color("color")
+	// 	.draw()
+	// }
 	
-	viz(china, "#navbar-chart-urban-rural");
-	viz(china, "#navbar-chart-population");
+	// viz(china, "#navbar-chart-urban-rural");
+	// viz(china, "#navbar-chart-population");
 	
 	
 	/* RESIZE LANDSAT
