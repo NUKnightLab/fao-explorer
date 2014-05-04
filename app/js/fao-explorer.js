@@ -107,7 +107,7 @@ var initFAO = function() {
         var mCSB_container = $("#timeline-navbar .mCSB_container");
         var mCustomScrollBox = $("#timeline-navbar .mCustomScrollBox");
         var width = Math.abs(mCSB_container.outerWidth() - mCustomScrollBox.width());
-        var pos = Math.floor(width/25) * (year - 1985);
+        var pos = (Math.floor(width/25) * (year - 1985)) + ((year - 1985) * 2);
         $("#timeline-navbar").mCustomScrollbar("scrollTo", pos); // navbar-chart-urban-rural
     }
 	
@@ -118,7 +118,7 @@ var initFAO = function() {
             }
             setScrollbarYear(yr + 1);
         }
-    }, 1000);
+    }, 100);
 
 	/* SCROLLBAR
 	================================================== */
@@ -344,7 +344,8 @@ var ratioHeight = function(width, ratio_width, ratio_height) {
             itemMarginTop: 40,
             itemStyle: {color: "#fff", fontWeight: "light", fontSize: "14px", fontFamily: "Helvetica"},
             symbolHeight: 0,
-            symbolWidth: 0
+            symbolWidth: 0,
+            maxHeight: 500
 
         }
     });
