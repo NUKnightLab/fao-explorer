@@ -108,7 +108,7 @@ var initFAO = function() {
         var mCustomScrollBox = $("#timeline-navbar .mCustomScrollBox");
         var width = Math.abs(mCSB_container.outerWidth() - mCustomScrollBox.width());
         var pos = Math.floor(width/25) * (year - 1985);
-        $("#timeline-navbar").mCustomScrollbar("scrollTo", pos, {scrollInertia:500 });
+        $("#timeline-navbar").mCustomScrollbar("scrollTo", pos); // navbar-chart-urban-rural
     }
 	
     setInterval(function() {
@@ -170,29 +170,6 @@ var initFAO = function() {
 	});
 	
 	 $(".mCSB_dragger_bar").html("1985");
-	 
-
-	
-	/* TIMELINE NAVBAR CHART
-	================================================== */
-	/*
-	function viz(data, container) {
-	 	d3plus.viz()
-	 	.container(container)
-	 	.data(data)
-	 	.type("stacked")
-	 	.id("type")
-	 	.text("type")
-	 	.y("value")
-	 	.x("Year")
-	 	.color("color")
-	 	.draw()
-	}
-	 
-	viz(china, "#navbar-chart-urban-rural");
-	viz(china, "#navbar-chart-population");
-	*/
-	
 	
 	/* RESIZE LANDSAT
 	================================================== */
@@ -298,4 +275,85 @@ var ratioHeight = function(width, ratio_width, ratio_height) {
 	return Math.round((width / ratio_width) * ratio_height);
 }
 
+// plug in highcharts
+    years = ['1985', '1990', '1995', '2000', '2005', '2010']
+    china = [{
+            name: 'Rural',
+            data: [819033,857756,853896,820755,757952,690789],
+            animation: false
+        }, {
+            name: 'Urban',
+            data: [243266,307673,383635,459674,560225,669032],
+            animation: false
+        }]
+    function drawchart(time, country, container) {
+    $(container).highcharts({
+        chart: {
+            type: 'area',
+            animation: false,
+            margin: [0, -80, 0, -80]
+        },
+        colors: ['#00A383', '#4671D5', '#00A383', '#FF7640', '#f7a35c', '#8085e9', '#f15c80', '#e4d354', '#8085e8', '#8d4653', '#91e8e1'
+        ],
+        title: {
+            text: ''
+        },
+        xAxis: {
+            categories: years,
+            tickmarkPlacement: 'off',
+            title: {
+                enabled: false
+            }
+        },
+        yAxis: {
+            title: {
+                text: 'Population (Billion)'
+            },
+            labels: {
+                formatter: function() {
+                    return this.value / 1000000;
+                }
+            }
+        },
+        tooltip: {
+            enabled: false,
+            animation: false
+        },
+        plotOptions: {
+            area: {
+                stacking: 'normal',
+                lineColor: '#666666',
+                lineWidth: 1,
+                marker: {
+                    lineWidth: 0,
+                    lineColor: '#666666',
+                    symbol: 'circle',
+                    radius: 2,
+                    states: {
+                        hover: {
+                            enabled: false
+                        }
+                    }
+                }
+            }
+        },
+        series: country,
+        legend: {
+            align: "center",
+            layout: "vertical", 
+            itemMarginTop: 40,
+            itemStyle: {color: "#fff", fontWeight: "light", fontSize: "14px", fontFamily: "Helvetica"},
+            symbolHeight: 0,
+            symbolWidth: 0
 
+        }
+    });
+};
+
+$(document).ready(function(){
+    drawchart(years, china, '#navbar-chart-population');
+
+    txt = $("text")
+    len = txt.length
+    txt[len - 1].remove()
+})
