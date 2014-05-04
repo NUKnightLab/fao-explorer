@@ -5554,6 +5554,11 @@ input[type="color"]:focus,
   font-size: 72px;
   letter-spacing: 20px;
 }
+@media screen and (max-width: 480px) {
+  .jumbotron h1 {
+    font-size: 48px;
+  }
+}
 div.navbar {
   text-align: center;
   border-top: 3px solid #333;
@@ -6346,6 +6351,14 @@ div#landsat-container-two .landsat-label {
 }
 .compare-chart .compare-chart-item .compare-chart-item-amount-second {
   background-color: #00FFF6;
+}
+@media screen and (max-width: 480px) {
+  .compare-chart .compare-chart-item .compare-chart-item-amount .compare-chart-item-number p,
+  .compare-chart .compare-chart-item .compare-chart-item-amount-second .compare-chart-item-number p,
+  .compare-chart .compare-chart-item .compare-chart-item-amount .compare-chart-item-number p.label,
+  .compare-chart .compare-chart-item .compare-chart-item-amount-second .compare-chart-item-number p.label {
+    font-size: 12px;
+  }
 }
 .subnav {
   font-size: 17px;
