@@ -82,31 +82,37 @@ $(document).ready(function(){
 
     var setChartHeight = function() {
         $.each(capitalStock, function(index, value) {
-          if (value['year'] == yr) {
-            var livestock = parseFloat(value['LIVESTOCK'] * 1000000)
-            var crops = parseFloat(value['CROPS'] * 1000000);
-            var sum = livestock + crops;
-            var livestockHeight = (livestock / sum) * 100;
-            var cropsHeight = (crops / sum) * 100;
-
-            $(compareItems[0]).css('height', livestockHeight + '%');
-            $(compareItems[1]).css('height', cropsHeight + '%');
-            $(values[0]).html('$' + humanNumbers(livestock));
-            $(values[1]).html('$' + humanNumbers(crops));
-          };
+			console.log(yr);
+			if (value['year'] == yr) {
+	            var livestock = parseFloat(value['LIVESTOCK'] * 1000000)
+	            var crops = parseFloat(value['CROPS'] * 1000000);
+	            var sum = livestock + crops;
+	            var livestockHeight = (livestock / sum) * 100;
+	            var cropsHeight = (crops / sum) * 100;
+			
+				//console.log(livestockHeight);
+				//console.log(cropsHeight);
+			
+	            $(compareItems[0]).css('height', livestockHeight + '%');
+	            $(compareItems[1]).css('height', cropsHeight + '%');
+	            $(values[0]).html('$' + humanNumbers(livestock));
+	            $(values[1]).html('$' + humanNumbers(crops));
+			
+			};
         });
     };
 
     // -- initialize for comparison chart
-    if ($('div#compare-chart')) {
-    var compareItems = $('.compare-chart-item-amount');
-    var values = $('.value');
+    if ($('.compare-chart')) {
+	    var compareItems = $('.compare-chart-item-amount');
+	    var values = $('.value');
 
 
-    $.getJSON("data/capital-stock/China-capital.json", function(data) {
-      capitalStock = data;
-      setChartHeight();
-    })
+	    $.getJSON("data/capital-stock/China-capital.json", function(data) {
+			capitalStock = data;
+			console.log(data);
+			setChartHeight();
+	    })
     }
 
     // -- end initialize    
@@ -125,7 +131,7 @@ $(document).ready(function(){
 			
     		whileScrolling:function(){
 				console.log("whileScrolling")
-    			var yr = 1985 + Math.floor(25 * (mcs.leftPct/100));
+    			yr = 1985 + Math.floor(25 * (mcs.leftPct/100));
     			$(".mCSB_dragger_bar").html( yr );
 				
     		},
