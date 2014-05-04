@@ -25,6 +25,9 @@
 			font-size: 15px !important;
 			fill: #fff !important;
 		}
+		div.d3plus_tooltip_container, div.d3plus_tooltip_arrow {
+			display: none;
+		}
 	</style>
 </head>
 <body>
@@ -51,9 +54,7 @@
 	    .id("type")         // key for which our data is unique on
 	    .text("type")       // key to use for display text
 	    .y("value")         // key to use for y-axis
-	    .x("Year", {
-	    	"scale": "continuous"
-	    })
+	    .x("Year")
 	    .color("color")
 	    .draw()             // finally, draw the visualization!
 
