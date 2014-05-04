@@ -8,67 +8,61 @@
 		body {
 		  font: 10px sans-serif;
 		}
-
-		.axis path,
-		.axis line {
-		  fill: none;
-		  stroke: #000;
-		  shape-rendering: crispEdges;
+		.viz {
+			height: 150px;
+			width: 100%;
 		}
-
-		.x.axis path {
-		  display: none;
+		#key {
+			display: none;
 		}
-
-		.line {
-		  fill: none;
-		  stroke: steelblue;
-		  stroke-width: 1.5px;
+		#xaxis, #xlabel, #ylabel {
+			display: none;
+		}
+		#y-axis {
+			display:block;
+		}
+		.d3plus_area text {
+			font-size: 15px !important;
+			fill: #fff !important;
+		}
+		div.d3plus_tooltip_container, div.d3plus_tooltip_arrow {
+			display: none;
 		}
 	</style>
 </head>
 <body>
-	<h1>Chinaaaa</h1>
-	<div id="viz"></div>
+	<h1>China</h1>
+	<div class="viz" id="china"></div>
+	<h1>Brazil</h1>
+	<div class="viz" id="brazil"></div>
+	<h1>India</h1>
+	<div class="viz" id="india"></div>
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 	<!-- load D3js -->
 	<script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
 	<!-- load D3plus after D3js -->
 	<script src="http://www.d3plus.org/js/d3plus.js"></script>
- 
-<script>
- 
-  // sample data array
-  var china = [
-	 	{"Country":"China","Year":1985,"type":"rural","per":77.1,"value":819033},
-		{"Country":"China","Year":1990,"type":"rural","per":73.6,"value":857756},
-		{"Country":"China","Year":1995,"type":"rural","per":69,"value":853896},
-		{"Country":"China","Year":2000,"type":"rural","per":64.1,"value":820755},
-		{"Country":"China","Year":2005,"type":"rural","per":57.5,"value":757952},
-		{"Country":"China","Year":2010,"type":"rural","per":50.8,"value":690789},
-		{"Country":"China","Year":1985,"type":"urban","per":22.9,"value":243266},
-		{"Country":"China","Year":1990,"type":"urban","per":26.4,"value":307673},
-		{"Country":"China","Year":1995,"type":"urban","per":31,"value":383635},
-		{"Country":"China","Year":2000,"type":"urban","per":35.9,"value":459674},
-		{"Country":"China","Year":2005,"type":"urban","per":42.5,"value":560225},
-		{"Country":"China","Year":2010,"type":"urban","per":49.2,"value":669032}
-	]
- 
-  // instantiate d3plus
-  var visualization = d3plus.viz()
-    .container("#viz")  // container DIV to hold the visualization
-    .data(china)  // data to use with the visualization
-    .type("stacked")    // visualization type
-    .id("type")         // key for which our data is unique on
-    .text("type")       // key to use for display text
-    .y("value")         // key to use for y-axis
-    .x("Year", {
-    	"scale": "continuous"
-    })
-    .time("Year")   // key to use for x-axis
-    .draw()             // finally, draw the visualization!
-	
-
-</script>
+ 	<script src="china.js"></script>
+ 	<script src="brazil.js"></script>
+ 	<script src="india.js"></script>
+	<script>
+		function viz(data, container) {
+			d3plus.viz()
+	    .container(container)
+	    .data(data)
+	    .type("stacked")
+	    .id("type")
+	    .text("type")
+	    .y("value")
+	    .x("Year")
+	    .color("color")
+	    .draw()
+		}
+		$(document).ready(function(){
+			viz(china, "#china");
+			viz(brazil, "#brazil");
+			viz(india, "#india");
+		})
+	</script>
 </body>
 </html>
