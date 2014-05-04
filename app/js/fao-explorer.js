@@ -48,6 +48,8 @@ $(document).ready(function(){
 
 	/* TIMELINE NAVBAR
 	================================================== */
+	
+	/*
 	$("#timeline-navbar").mCustomScrollbar({
         scrollInertia: 0,
 		horizontalScroll:true,
@@ -62,8 +64,44 @@ $(document).ready(function(){
             }
         }
 	});
+	*/
+   
+	
+    var prevIndex = undefined;
 
-    $(".mCSB_dragger_bar").html("1985");
+    $("#timeline-navbar").mCustomScrollbar({
+    	scrollInertia: 0,
+    	horizontalScroll:true,
+    	autoDraggerLength: false,
+    	advanced:{autoExpandHorizontalScroll:false,updateOnContentResize:false},
+    	scrollButtons: { enable: false },
+    	contentTouchScroll: true,
+    	callbacks:{
+			
+    		whileScrolling:function(){
+				console.log("whileScrolling")
+    			var yr = 1985 + Math.floor(25 * (mcs.leftPct/100));
+    			$(".mCSB_dragger_bar").html( yr );
+				
+    		},
+			
+    		onScroll: function() {
+				console.log("HEY")
+    			var idx = Math.ceil(25 * (mcs.leftPct/100)) - 1;
+   			 	// optimization 
+   			 	if (prevIndex === undefined || prevIndex === idx) {
+    				revIndex = idx;
+    				return;
+    			}
+				
+				$('div#landsat-container img').css('visibility', 'hidden');
+			 	$('div#landsat-container img:eq(' + idx + ')').css('visibility', 'visible');
+			}
+			
+		}
+	});
+	
+	 $(".mCSB_dragger_bar").html("1985");
 	
 	/* TIMELINE NAVBAR CHART
 	================================================== */

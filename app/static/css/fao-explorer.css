@@ -6215,6 +6215,15 @@ figure figcaption.credit {
   height: 100px;
   width: 100%;
 }
+div#landsat-container {
+  position: relative;
+  height: 600px;
+}
+div#landsat-container > img {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
 .compare-chart [class*="col-"] {
   padding: 0px;
 }
