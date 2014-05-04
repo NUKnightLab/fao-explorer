@@ -1,0 +1,129 @@
+doctype html
+html(lang="en")
+	include includes/ascii
+
+	head
+		meta(charset='utf-8')
+		meta(http-equiv="X-UA-Compatible", content="IE=edge")
+		meta(name='viewport', content='width=device-width, initial-scale=1.0')
+		meta(name='keywords', content='Template, Bootstrap')
+		meta(name='apple-mobile-web-app-capable', content='yes')
+		meta(name='apple-touch-fullscreen', content='yes')
+
+		title Knight Lab FAO Explorer
+
+		// CSS
+		link(rel='stylesheet', href='css/fao-explorer.css?v1')
+
+		// HTML5 shim, for IE6-8 support of HTML elements
+		//if lt IE 9
+			script(src='https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js')
+			script(src='https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js')
+		
+		// Icon
+		link(rel='shortcut icon', href='img/ico/favicon.png')
+
+	body(data-spy='scroll',data-target='.subnav',data-offset='80')
+		
+
+
+		// HEADER
+		header.jumbotron
+			div.container
+				div.story-header
+					h1 China
+						//small Deck goes here
+					// p.lead Deck goes here
+
+		// Satellite Images
+		section
+			div#landsat-container
+				img.img-responsive(src="img/Shanghai/shanghai_01.jpg")
+				img.img-responsive(src="img/Shanghai/shanghai_02.jpg")
+				img.img-responsive(src="img/Shanghai/shanghai_03.jpg")
+				img.img-responsive(src="img/Shanghai/shanghai_04.jpg")
+				img.img-responsive(src="img/Shanghai/shanghai_05.jpg")
+				img.img-responsive(src="img/Shanghai/shanghai_06.jpg")
+				img.img-responsive(src="img/Shanghai/shanghai_07.jpg")
+				img.img-responsive(src="img/Shanghai/shanghai_08.jpg")
+				img.img-responsive(src="img/Shanghai/shanghai_09.jpg")
+				img.img-responsive(src="img/Shanghai/shanghai_10.jpg")
+				img.img-responsive(src="img/Shanghai/shanghai_11.jpg")
+				img.img-responsive(src="img/Shanghai/shanghai_12.jpg")
+				img.img-responsive(src="img/Shanghai/shanghai_13.jpg")
+				img.img-responsive(src="img/Shanghai/shanghai_14.jpg")
+				img.img-responsive(src="img/Shanghai/shanghai_15.jpg")
+				img.img-responsive(src="img/Shanghai/shanghai_16.jpg")
+				img.img-responsive(src="img/Shanghai/shanghai_17.jpg")
+				img.img-responsive(src="img/Shanghai/shanghai_18.jpg")
+				img.img-responsive(src="img/Shanghai/shanghai_19.jpg")
+				img.img-responsive(src="img/Shanghai/shanghai_20.jpg")
+				img.img-responsive(src="img/Shanghai/shanghai_21.jpg")
+				img.img-responsive(src="img/Shanghai/shanghai_22.jpg")
+				img.img-responsive(src="img/Shanghai/shanghai_23.jpg")
+				img.img-responsive(src="img/Shanghai/shanghai_24.jpg")
+				img.img-responsive(src="img/Shanghai/shanghai_25.jpg")
+
+		// NAVBAR
+		section
+			div#navbar-main
+				div.navbar.navbar-default#main-nav(role="navigation")
+					div#timeline-navbar
+						div#timeline-item-container
+					div
+						div.viz#navbar-chart-population
+
+								
+		// CHART THING
+		section
+			div.compare-chart
+				div.container
+					div.row
+						div.col-md-6
+							div.compare-chart-item
+								div.compare-chart-item-amount(style="height:25%;")
+									div.compare-chart-item-number
+										p.value 500
+						div.col-md-6
+							div.compare-chart-item
+								div.compare-chart-item-amount.compare-chart-item-amount-second(style="height:50%;")
+									div.compare-chart-item-number
+										p.value 750
+		// NAVBAR
+		section
+			div#navbar-main
+				div.navbar.navbar-default#nav-population(role="navigation")
+					div
+						div.viz#navbar-chart-urban-rural
+		// Filler
+		section.container
+			p Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Morbi commodo, ipsum sed pharetra gravida, orci magna rhoncus neque, id pulvinar odio lorem non turpis. Nullam sit amet enim. Suspendisse id velit vitae ligula volutpat condimentum. Aliquam erat volutpat. Sed quis velit. Nulla facilisi. Nulla libero. Vivamus pharetra posuere sapien. Nam consectetuer. Sed aliquam, nunc eget euismod ullamcorper, lectus nunc ullamcorper orci, fermentum bibendum enim nibh eget ipsum. Donec porttitor ligula eu dolor. Maecenas vitae nulla consequat libero cursus venenatis. Nam magna enim, accumsan eu, blandit sed, blandit a, eros.
+
+			p Quisque facilisis erat a dui. Nam malesuada ornare dolor. Cras gravida, diam sit amet rhoncus ornare, erat elit consectetuer erat, id egestas pede nibh eget odio. Proin tincidunt, velit vel porta elementum, magna diam molestie sapien, non aliquet massa pede eu diam. Aliquam iaculis. Fusce et ipsum et nulla tristique facilisis. Donec eget sem sit amet ligula viverra gravida. Etiam vehicula urna vel turpis. Suspendisse sagittis ante a urna. Morbi a est quis orci consequat rutrum. Nullam egestas feugiat felis.
+
+			p Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Morbi commodo, ipsum sed pharetra gravida, orci magna rhoncus neque, id pulvinar odio lorem non turpis. Nullam sit amet enim. Suspendisse id velit vitae ligula volutpat condimentum. Aliquam erat volutpat. Sed quis velit. Nulla facilisi. Nulla libero. Vivamus pharetra posuere sapien. Nam consectetuer. Sed aliquam, nunc eget euismod ullamcorper, lectus nunc ullamcorper orci, fermentum bibendum enim nibh eget ipsum. Donec porttitor ligula eu dolor. Maecenas vitae nulla consequat libero cursus venenatis. Nam magna enim, accumsan eu, blandit sed, blandit a, eros.
+
+			p Quisque facilisis erat a dui. Nam malesuada ornare dolor. Cras gravida, diam sit amet rhoncus ornare, erat elit consectetuer erat, id egestas pede nibh eget odio. Proin tincidunt, velit vel porta elementum, magna diam molestie sapien, non aliquet massa pede eu diam. Aliquam iaculis. Fusce et ipsum et nulla tristique facilisis. Donec eget sem sit amet ligula viverra gravida. Etiam vehicula urna vel turpis. Suspendisse sagittis ante a urna. Morbi a est quis orci consequat rutrum. Nullam egestas feugiat felis.
+			
+			p Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Morbi commodo, ipsum sed pharetra gravida, orci magna rhoncus neque, id pulvinar odio lorem non turpis. Nullam sit amet enim. Suspendisse id velit vitae ligula volutpat condimentum. Aliquam erat volutpat. Sed quis velit. Nulla facilisi. Nulla libero. Vivamus pharetra posuere sapien. Nam consectetuer. Sed aliquam, nunc eget euismod ullamcorper, lectus nunc ullamcorper orci, fermentum bibendum enim nibh eget ipsum. Donec porttitor ligula eu dolor. Maecenas vitae nulla consequat libero cursus venenatis. Nam magna enim, accumsan eu, blandit sed, blandit a, eros.
+
+			p Quisque facilisis erat a dui. Nam malesuada ornare dolor. Cras gravida, diam sit amet rhoncus ornare, erat elit consectetuer erat, id egestas pede nibh eget odio. Proin tincidunt, velit vel porta elementum, magna diam molestie sapien, non aliquet massa pede eu diam. Aliquam iaculis. Fusce et ipsum et nulla tristique facilisis. Donec eget sem sit amet ligula viverra gravida. Etiam vehicula urna vel turpis. Suspendisse sagittis ante a urna. Morbi a est quis orci consequat rutrum. Nullam egestas feugiat felis.
+
+		
+		// Footer
+		footer
+			div.container
+				p.copyright
+					| &copy; 2013 
+
+		// JavaScript
+		script(type='text/javascript', src='http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js')
+		// FAO Explorer
+		script(type='text/javascript', src='js/fao-explorer.js?v10')
+		// Remove this before publish
+		script(type='text/javascript', src='js/holder.js')
+		// Page Specific
+		script.
+			$(document).ready(function(){
+				initFAO();
+			});

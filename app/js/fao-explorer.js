@@ -34,8 +34,8 @@
 
 // @codekit-prepend "library/jquery.mCustomScrollbar.js";
 
-$(document).ready(function(){
 
+var initFAO = function() {
 	/* WAYPOINTS
 	================================================== */
 	$('#main-nav').waypoint('sticky', {
@@ -180,6 +180,27 @@ $(document).ready(function(){
 	viz(china, "#navbar-chart-urban-rural");
 	viz(china, "#navbar-chart-population");
 	
-});
+	
+	/* RESIZE LANDSAT
+	================================================== */
+	function resizeLandsat() {
+
+		$("#landsat-container").height(ratioHeight($("#landsat-container img").width(), 1459, 719)) ;
+	}
+	
+	/* ON RESIZE
+	================================================== */
+	$( window ).resize(function() {
+		resizeLandsat();
+	});
+}
+
+/* Utlities
+================================================== */
+
+// RATIO
+var ratioHeight = function(width, ratio_width, ratio_height) {
+	return Math.round((width / ratio_width) * ratio_height);
+}
 
 

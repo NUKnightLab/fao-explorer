@@ -6223,6 +6223,7 @@ div#landsat-container > img {
   position: absolute;
   top: 0;
   left: 0;
+  width: 100%;
 }
 .compare-chart [class*="col-"] {
   padding: 0px;
