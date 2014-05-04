@@ -42,7 +42,8 @@ var prevIndex = undefined,
 	capitalStock = {},
 	topCrops = {},
 	compareItems,
-	values;
+	values,
+	is_playing = false;
 
 var swapLandsatImages = function() {
     var idx = Math.ceil(25 * (mcs.leftPct/100)) - 1;
@@ -149,21 +150,23 @@ function humanNumbers(n) {
 	
 	/* TIMELINE NAVBAR CHART
 	================================================== */
-	// function viz(data, container) {
-	// 	d3plus.viz()
-	// 	.container(container)
-	// 	.data(data)
-	// 	.type("stacked")
-	// 	.id("type")
-	// 	.text("type")
-	// 	.y("value")
-	// 	.x("Year")
-	// 	.color("color")
-	// 	.draw()
-	// }
-	
-	// viz(china, "#navbar-chart-urban-rural");
-	// viz(china, "#navbar-chart-population");
+	/*
+	function viz(data, container) {
+	 	d3plus.viz()
+	 	.container(container)
+	 	.data(data)
+	 	.type("stacked")
+	 	.id("type")
+	 	.text("type")
+	 	.y("value")
+	 	.x("Year")
+	 	.color("color")
+	 	.draw()
+	}
+	 
+	viz(china, "#navbar-chart-urban-rural");
+	viz(china, "#navbar-chart-population");
+	*/
 	
 	
 	/* RESIZE LANDSAT
@@ -182,7 +185,9 @@ function humanNumbers(n) {
 	/* INIT STUFF
 	================================================== */
 	resizeLandsat();
-	
+	$("#play-button").click(function(){
+		playPause();
+	})
 }
 
 /* COMPARISON CHAR TINIT
@@ -206,6 +211,27 @@ var compareChartInit = function(the_data_url) {
             setChartHeight();
 	    })
     }
+}
+
+var playPause = function() {
+	
+	if (is_playing) {
+		pauseTime();
+		is_playing = false;
+	} else {
+		playTime();
+		is_playing = true;
+	}
+}
+var playTime = function() {
+	console.log("play");
+	$("#play-button").html("<span class='glyphicon glyphicon-pause'></span>");
+}
+
+var pauseTime = function() {
+	console.log("pause");
+	$("#play-button").html("Play");
+	$("#play-button").html("<span class='glyphicon glyphicon-play'></span>");
 }
 
 var humanNumbers = function(n) {
