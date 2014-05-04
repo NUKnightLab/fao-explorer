@@ -102,7 +102,7 @@ function humanNumbers(n) {
         var mCustomScrollBox = $("#timeline-navbar .mCustomScrollBox");
         var width = Math.abs(mCSB_container.outerWidth() - mCustomScrollBox.width());
         var pos = Math.floor(width/25) * (year - 1985);
-        $("#timeline-navbar").mCustomScrollbar("scrollTo", pos);
+        $("#timeline-navbar").mCustomScrollbar("scrollTo", pos, {scrollInertia:500 });
     }
 
     setInterval(function() {
