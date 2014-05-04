@@ -30,14 +30,15 @@ html(lang="en")
 		// HEADER
 		header.jumbotron
 			div.container
-				div.story-header
-					h1 China
+				h1 China
 						//small Deck goes here
 					// p.lead Deck goes here
 
 		// Satellite Images
 		section
 			div#landsat-container
+				div.landsat-label
+					| Shanghai
 				img.img-responsive(src="img/Shanghai/shanghai_01.jpg")
 				img.img-responsive(src="img/Shanghai/shanghai_02.jpg")
 				img.img-responsive(src="img/Shanghai/shanghai_03.jpg")
@@ -72,6 +73,7 @@ html(lang="en")
 				div.navbar.navbar-default#main-nav(role="navigation")
 					div#timeline-navbar
 						div#timeline-item-container
+					div#timeline-navbar-line
 					div
 						div.viz#navbar-chart-population
 
@@ -79,14 +81,14 @@ html(lang="en")
 		// CHART THING
 		section
 			div.compare-chart
-				div.container
+				div
 					div.row
-						div.col-md-6
+						div.col-md-6.col-sm-6
 							div.compare-chart-item
 								div.compare-chart-item-amount(style="height:25%;")
 									div.compare-chart-item-number
 										p.value 500
-						div.col-md-6
+						div.col-md-6.col-sm-6
 							div.compare-chart-item
 								div.compare-chart-item-amount.compare-chart-item-amount-second(style="height:50%;")
 									div.compare-chart-item-number

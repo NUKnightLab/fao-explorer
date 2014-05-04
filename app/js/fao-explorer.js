@@ -43,7 +43,9 @@ var prevIndex = undefined,
 	topCrops = {},
 	compareItems,
 	values,
-	is_playing = false;
+	is_playing = false,
+	dragger,
+	dragger_position;
 
 var swapLandsatImages = function() {
     var idx = Math.ceil(25 * (mcs.leftPct/100)) - 1;
@@ -73,20 +75,23 @@ function humanNumbers(n) {
   return n.toFixed(0);
 }
 
-    var setChartHeight = function() {
-        var value = capitalStock[yr];
-        var livestockHeight = (value['LIVESTOCK'] / capitalStock.max) * 100;
-        var cropsHeight = (value['CROPS'] / capitalStock.max) * 100;
+var setChartHeight = function() {
+	if (yr < 2008) {
+	    var value = capitalStock[yr];
+	    var livestockHeight = (value['LIVESTOCK'] / capitalStock.max) * 100;
+	    var cropsHeight = (value['CROPS'] / capitalStock.max) * 100;
 
-        $(compareItems[0]).css('height', livestockHeight + '%');
-        $(compareItems[1]).css('height', cropsHeight + '%');
-        $(values[0]).html('$' + humanNumbers(value['LIVESTOCK']));
-        $(values[1]).html('$' + humanNumbers(value['CROPS']));
+	    $(compareItems[0]).css('height', livestockHeight + '%');
+	    $(compareItems[1]).css('height', cropsHeight + '%');
+	    $(values[0]).html('$' + humanNumbers(value['LIVESTOCK']));
+	    $(values[1]).html('$' + humanNumbers(value['CROPS']));
+	}
+    
 
 
-    };
+};
 
-    var initFAO = function() {
+var initFAO = function() {
     	/* WAYPOINTS
     	================================================== */
     	$('#main-nav').waypoint('sticky', {
@@ -103,6 +108,7 @@ function humanNumbers(n) {
 	================================================== */
     $("#timeline-navbar").mCustomScrollbar({
     	scrollInertia: 0,
+		mouseWheel:false,
     	horizontalScroll:true,
     	autoDraggerLength: false,
     	advanced:{autoExpandHorizontalScroll:false,updateOnContentResize:false},
@@ -135,9 +141,20 @@ function humanNumbers(n) {
 				$('div#landsat-container img').css('visibility', 'hidden');
 			 	$('div#landsat-container img:eq(' + idx + ')').css('visibility', 'visible');
 				
-				var dragger = $(".mCSB_dragger");
-				var dragger_position = dragger.position();
-				console.log(dragger_position.left);
+				
+				dragger_position = dragger.position();
+				//console.log(dragger_position.left);
+				var drag_width = dragger.width();
+				$("#timeline-navbar-line").css("left", dragger_position.left + (drag_width / (100/mcs.leftPct) ) - 10);
+				console.log(drag_width);
+				
+				
+				
+				
+				if (dragger_position.left >= ($("body").width() - dragger.width() - 2) ) {
+					console.log("END")
+				}
+				
 				
 			}
 			
@@ -187,8 +204,23 @@ function humanNumbers(n) {
 	resizeLandsat();
 	$("#play-button").click(function(){
 		playPause();
-	})
+	});
+	
+	// DRAGGER POSITION
+	dragger = $(".mCSB_dragger");
+	dragger_position = dragger.position();
+	//$("#timeline-navbar-line").css("left", dragger_position.left + (dragger.width()/2));
+	$("#timeline-navbar-line").css("left", dragger_position.left + (dragger.width()/2));
+	
 }
+
+
+
+
+
+
+
+
 
 /* COMPARISON CHAR TINIT
 ================================================== */
