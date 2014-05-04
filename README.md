@@ -1,15 +1,4 @@
 fao-explorer
 ============
 
-Tools to better understand the UN FAO API
-
-Country profiles derived from http://www.fao.org/countryprofiles/iso3list/en/
-
-Country  UNI FAOSTAT
-Brazil  76  21
-China   156 351
-India   356 100
-Nigeria 566 159
-Russia  643 185
-
-FAO has 194 members
+Example components from a potentially larger tool that supports exploring data over time on a country-by-country basis. This data focuses on China, India, Nigeria and Brazil. Current components include population data from the UN against LANDSAT imagery from Google Earth Engine and livestock production vs. investment in various types of agriculture.
