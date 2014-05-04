@@ -20,4 +20,4 @@ export AWS_ACCESS_KEY_ID="lolololololsecurity"
 export AWS_SECRET_ACCESS_KEY="lololololsecurity"
 ```
 
-Reload your environment, and run `fab production master deploy` to deploy to our s3 bucket, `fao-explorer.knightlab.com`. 
+Reload your environment, and run `fab production master deploy` to deploy to our s3 bucket, [fao-explorer.knightlab.com](http://fao-explorer.knightlab.com). 
