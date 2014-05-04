@@ -45,7 +45,7 @@ var prevIndex = undefined,
 	values,
 	is_playing = false,
 	dragger,
-	dragger_position;
+	dragger_position; 
 
 var swapLandsatImages = function() {
     var idx = Math.ceil(25 * (mcs.leftPct/100)) - 1;
