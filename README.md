@@ -9,4 +9,15 @@ The `data` folder contains raw data and various scripts for transformaton. Not a
 
 ## App components
 
-The `app` folder contains the frontend of the application. TKTKTK
+The `app` folder contains the frontend of the application. There is a flask app here that is not really used as well as a `fabfile` for deployment. To develop on the app, `pip install -r requirements.txt` to use Fabric.
+
+### Deployment
+
+First, configure your AWS key and secret by exporting them as environment variables in your bash/zsh profile:
+
+```
+export AWS_ACCESS_KEY_ID="lolololololsecurity"
+export AWS_SECRET_ACCESS_KEY="lololololsecurity"
+```
+
+Reload your environment, and run `fab production master deploy` to deploy to our s3 bucket, `fao-explorer.knightlab.com`. 
