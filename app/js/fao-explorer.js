@@ -150,21 +150,23 @@ function humanNumbers(n) {
 	
 	/* TIMELINE NAVBAR CHART
 	================================================== */
-	// function viz(data, container) {
-	// 	d3plus.viz()
-	// 	.container(container)
-	// 	.data(data)
-	// 	.type("stacked")
-	// 	.id("type")
-	// 	.text("type")
-	// 	.y("value")
-	// 	.x("Year")
-	// 	.color("color")
-	// 	.draw()
-	// }
-	
-	// viz(china, "#navbar-chart-urban-rural");
-	// viz(china, "#navbar-chart-population");
+	/*
+	function viz(data, container) {
+	 	d3plus.viz()
+	 	.container(container)
+	 	.data(data)
+	 	.type("stacked")
+	 	.id("type")
+	 	.text("type")
+	 	.y("value")
+	 	.x("Year")
+	 	.color("color")
+	 	.draw()
+	}
+	 
+	viz(china, "#navbar-chart-urban-rural");
+	viz(china, "#navbar-chart-population");
+	*/
 	
 	
 	/* RESIZE LANDSAT
