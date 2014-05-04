@@ -48,17 +48,15 @@
 	<script>
 		function viz(data, container) {
 			d3plus.viz()
-	    .container(container)  // container DIV to hold the visualization
-	    .data(data)  // data to use with the visualization
-	    .type("stacked")    // visualization type
-	    .id("type")         // key for which our data is unique on
-	    .text("type")       // key to use for display text
-	    .y("value")         // key to use for y-axis
+	    .container(container)
+	    .data(data)
+	    .type("stacked")
+	    .id("type")
+	    .text("type")
+	    .y("value")
 	    .x("Year")
 	    .color("color")
-	    .draw()             // finally, draw the visualization!
-
-	    // viz.style({"font", "family", "Helvetica"});
+	    .draw()
 		}
 		$(document).ready(function(){
 			viz(china, "#china");
