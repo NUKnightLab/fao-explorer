@@ -19,10 +19,11 @@
 			display: none;
 		}
 		#y-axis {
-			/*margin-right: -100px;*/
+			display:block;
 		}
 		.d3plus_area text {
 			font-size: 15px !important;
+			fill: #fff !important;
 		}
 	</style>
 </head>
@@ -53,10 +54,10 @@
 	    .x("Year", {
 	    	"scale": "continuous"
 	    })
-	    .style({
-	   		"background": "#000"
-	    })
+	    .color("color")
 	    .draw()             // finally, draw the visualization!
+
+	    // viz.style({"font", "family", "Helvetica"});
 		}
 		$(document).ready(function(){
 			viz(china, "#china");
