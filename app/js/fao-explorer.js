@@ -105,7 +105,23 @@ var initFAO = function() {
 
 	
    
+	window.setScrollbarYear = function(year) {
+        // 
+        var mCSB_container = $("#timeline-navbar .mCSB_container");
+        var mCustomScrollBox = $("#timeline-navbar .mCustomScrollBox");
+        var width = Math.abs(mCSB_container.outerWidth() - mCustomScrollBox.width());
+        var pos = Math.floor(width/25) * (year - 1985);
+        $("#timeline-navbar").mCustomScrollbar("scrollTo", pos, {scrollInertia:500 });
+    }
 	
+    setInterval(function() {
+        if (is_playing) {
+            if (yr >= 2010) {
+                yr = 1984;
+            }
+            setScrollbarYear(yr + 1);
+        }
+    }, 1000);
 
 	/* SCROLLBAR
 	================================================== */
@@ -119,13 +135,13 @@ var initFAO = function() {
     	contentTouchScroll: true,
     	callbacks:{
 			
-    		whileScrolling:function(){
+			
+    		onScroll: function() {
+    			var idx = Math.ceil(25 * (mcs.leftPct/100)) - 1;
+
     			yr = 1985 + Math.floor(25 * (mcs.leftPct/100));
     			$(".mCSB_dragger_bar").html( yr );
 				
-    		},
-			
-    		onScroll: function() {
                 if ($('div#compare-chart')) {
                   setChartHeight();
                 }
@@ -134,22 +150,14 @@ var initFAO = function() {
                   swapLandsatImages();
                 }
 
-    			var idx = Math.ceil(25 * (mcs.leftPct/100)) - 1;
-   			 	// optimization 
-   			 	if (prevIndex === undefined || prevIndex === idx) {
-    				revIndex = idx;
-    				return;
-    			}
 				
 				$('div#landsat-container img').css('visibility', 'hidden');
 			 	$('div#landsat-container img:eq(' + idx + ')').css('visibility', 'visible');
 				
 				
 				dragger_position = dragger.position();
-				//console.log(dragger_position.left);
 				var drag_width = dragger.width();
 				$("#timeline-navbar-line").css("left", dragger_position.left + (drag_width / (100/mcs.leftPct) ) - 10);
-				console.log(drag_width);
 				
 				
 				
