@@ -11,7 +11,15 @@
     float: left;
     width: 3000px;
 }
-
+#timeline-navbar-line {
+	position:absolute;
+	width:10px;
+	height:100%;
+	background-color:#000;
+	top:0;
+	left:50px;
+	z-index:9;
+}
 
 /* CUSTOM SCROLLBAR STYLES */
 
@@ -34,10 +42,17 @@
     -webkit-border-radius:0px;
     -moz-border-radius:0px;
     border-radius:0px;
+	background-color:#CCC; 
 }
 .mCSB_horizontal>.mCSB_scrollTools .mCSB_dragger{
     width:120px;
     height:100%;
+	//background-color:#000; 
+	color:#CCC;
+	z-index:10;
+	/*border-radius:7px;
+    -webkit-border-radius:7px;
+    -moz-border-radius:7px;*/
 }
 .mCSB_horizontal>.mCSB_scrollTools .mCSB_dragger .mCSB_dragger_bar{
     width:100%;
@@ -49,4 +64,17 @@
     /* year label */
     font-family: Helvetica;
     font-size: 30px;
+	background-color:#000; 
+	border-radius:7px;
+    -webkit-border-radius:7px;
+    -moz-border-radius:7px;
+
+}
+.mCustomScrollBox>.mCSB_scrollTools{
+	opacity:1;
+	filter:"alpha(opacity=100)"; -ms-filter:"alpha(opacity=100)"; /* old ie */
+}
+.mCustomScrollBox:hover>.mCSB_scrollTools{
+	opacity:1;
+	filter:"alpha(opacity=100)"; -ms-filter:"alpha(opacity=100)"; /* old ie */
 }
