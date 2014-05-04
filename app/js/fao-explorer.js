@@ -44,7 +44,7 @@ $(document).ready(function(){
 		stuckClass: 'navbar-fixed-top'
 	});
 	
-	// add sticky switcher here
+	// add sticky switcher here 
 
 	/* TIMELINE NAVBAR
 	================================================== */
